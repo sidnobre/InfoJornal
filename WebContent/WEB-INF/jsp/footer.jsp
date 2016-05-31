@@ -2,7 +2,7 @@
 <div class="row clearfix well">
 	<div class="col-md-4 column">
 		<p class="text-muted">
-			<strong>© Copyright 2015 Quixadá Comunicação e Participações
+			<strong>© Copyright 2016 Quixadá Comunicação e Participações
 				S.A.</strong>
 		</p>
 	</div>
