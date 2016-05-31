@@ -1,0 +1,29 @@
+body {
+	background-image: url('../img/jornal.jpg');
+}
+
+.fundo{
+	background-color: white;
+}
+
+.pull-bottom{
+	padding-top: 75px;
+}
+
+.center-block{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.altura-min{
+	min-height:275px;
+}
+
+.altura-min-form{
+	min-height:450px;
+}
+
+.texto-justificado{
+	text-align: justify;
+}
