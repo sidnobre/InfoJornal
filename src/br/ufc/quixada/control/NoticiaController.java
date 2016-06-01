@@ -19,8 +19,8 @@ import br.ufc.quixada.dao.NoticiaDAO;
 import br.ufc.quixada.model.Noticia;
 import br.ufc.quixada.model.Secao;
 import br.ufc.quixada.model.Usuario;
-import br.ufc.quixada.util.AutenticacaoRule;
-import br.ufc.quixada.util.AutorizacaoRule;
+import br.ufc.quixada.security.AutenticacaoRule;
+import br.ufc.quixada.security.AutorizacaoRule;
 
 @Controller
 public class NoticiaController {
@@ -29,8 +29,6 @@ public class NoticiaController {
 	private NoticiaDAO dao;
 	@Inject
 	private Result resultado;
-	//@Inject
-	//private ServletContext context;
 	@Inject
 	private NoticiaValidador validador;
 	

@@ -11,7 +11,7 @@ import br.ufc.quixada.dao.PapelDAO;
 import br.ufc.quixada.dao.UsuarioDAO;
 import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Usuario;
-import br.ufc.quixada.util.UsuarioSessao;
+import br.ufc.quixada.security.UsuarioSessao;
 
 @Controller
 public class AutenticacaoController {

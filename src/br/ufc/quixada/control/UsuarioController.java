@@ -17,8 +17,8 @@ import br.ufc.quixada.dao.PapelDAO;
 import br.ufc.quixada.dao.UsuarioDAO;
 import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Usuario;
-import br.ufc.quixada.util.AutenticacaoRule;
-import br.ufc.quixada.util.AutorizacaoRule;
+import br.ufc.quixada.security.AutenticacaoRule;
+import br.ufc.quixada.security.AutorizacaoRule;
 
 @Controller
 public class UsuarioController {
@@ -41,6 +41,7 @@ public class UsuarioController {
 	public void adicionarLeitor(Usuario usuario){
 		usuarioValidador.validarFormulario(usuario);
 		String hash = DigestUtils.sha256Hex(usuario.getSenha());
+		System.out.println(hash);
 		usuario.setSenha(hash);
 		List<Papel> papeis = new ArrayList<Papel>();
 		papeis.add(pdao.buscar(1L));

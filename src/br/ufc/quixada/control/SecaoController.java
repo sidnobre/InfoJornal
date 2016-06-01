@@ -10,8 +10,8 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
 import br.ufc.quixada.dao.SecaoDAO;
 import br.ufc.quixada.model.Secao;
-import br.ufc.quixada.util.AutenticacaoRule;
-import br.ufc.quixada.util.AutorizacaoRule;
+import br.ufc.quixada.security.AutenticacaoRule;
+import br.ufc.quixada.security.AutorizacaoRule;
 
 @Controller
 public class SecaoController {

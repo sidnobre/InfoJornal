@@ -1,4 +1,4 @@
-package br.ufc.quixada.util;
+package br.ufc.quixada.security;
 
 import java.io.Serializable;
 
