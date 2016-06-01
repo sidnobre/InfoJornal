@@ -14,7 +14,8 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="active">
-							<a href="<c:url value='/classificado/listar'/>">Classificados</a>
+							<a href="#">Classificados</a>
+							<!--<a href="<c:url value='/classificado/listar'/>">Classificados</a>-->
 						</li>
 						<li>
 							<a href="#">Contato</a>
@@ -115,9 +116,11 @@
 							<ul class="nav navbar-nav navbar-right">
          						<li class="dropdown" style="min-width:200px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${usuarioAutenticado.nome}<span class="caret"></span></a>
           							<ul class="dropdown-menu" role="menu" style="min-width: 200px">
-           					 			<li><a href="<c:url value='/secao/formulario'/>">Adicionar Seção</a></li>
+           					 			<!--<li><a href="<c:url value='/secao/formulario'/>">Adicionar Seção</a></li>-->
+           					 			<li><a href="#">Adicionar Seção</a></li>
             							<li><a href="<c:url value='/usuario/formularioJornalista'/>">Adicionar Jornalista</a></li>
-            							<li><a href="<c:url value='/classificado/formulario'/>">Adicionar Classificado</a></li>
+            							<!--<li><a href="<c:url value='/classificado/formulario'/>">Adicionar Classificado</a></li>-->
+            							<li><a href="#">Adicionar Classificado</a></li>
            					 			<li class="divider"></li>
            					 			<li><a href="<c:url value='/autenticacao/logout'/>">Sair</a></li>
           							</ul>

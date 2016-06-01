@@ -86,8 +86,8 @@
 						<small><cite>${noticia.autor.nome}</cite></small>
 					</blockquote>
 					<c:if test="${(usuarioAutenticado.usuario.id == noticia.autor.id and usuarioAutenticado.papel.nivel == 2000) or usuarioAutenticado.papel.nivel == 3000}">
-						<!--<a id="modal-65558" href="#modal-container-65558" role="button" class="btn" data-toggle="modal">Launch demo modal</a>-->
-						<a id="modal-65558" class="btn btn-primary" role="button" href="#modal-container-65558" data-toggle="modal">Remover Notícia</a>
+						<!-- <a id="modal-65558" class="btn btn-primary" role="button" href="#modal-container-65558" data-toggle="modal">Remover Notícia</a> -->
+						<a id="modal-65558" class="btn btn-primary" role="button" href="#" data-toggle="modal">Remover Notícia</a>
 						<div class="modal fade" id="modal-container-65558" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">

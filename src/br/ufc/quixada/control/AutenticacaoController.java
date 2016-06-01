@@ -25,6 +25,7 @@ public class AutenticacaoController {
 	@Post
 	public void login(Usuario usuario, Long papel){
 		String hash = DigestUtils.sha256Hex(usuario.getSenha());
+		System.out.println(hash);
 		usuario.setSenha(hash);
 		Usuario usuarioCarregado = udao.buscarByLoginSenha(usuario);
 		Papel papelCarregado = pdao.buscar(papel);
