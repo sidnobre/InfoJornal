@@ -15,7 +15,7 @@
 <link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
 
 
-<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>">
+<!-- <link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
 
 <script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>">
 	
@@ -122,12 +122,12 @@
 				<div class="col-md-1 column"></div>
 				<div class="col-md-5 column">
 					<h2>Comentários</h2>
-					<script type="text/javascript">
+					<!--<script type="text/javascript">
 						jQuery(document).ready(function() {
   							jQuery('#fbcomments').attr('data-href', document.domain + window.location.pathname);
 						});
 					</script>
-					<div id="fbcomments" class="fb-comments" data-href="" data-numposts="3" data-colorscheme="light"></div>
+					<div id="fbcomments" class="fb-comments" data-href="" data-numposts="3" data-colorscheme="light"></div>-->
 				<div class="col-md-1 column"></div>
 			</div>
 		</div>

@@ -20,8 +20,10 @@ import javax.persistence.Table;
 			name="Noticia.ultimaPorSecao",
 			query="SELECT n1 FROM Noticia n1 "
 					+ "WHERE n1.data = (SELECT MAX(n2.data) FROM Noticia n2 WHERE n2.secao = n1.secao) "
-					+ "ORDER BY n1.data"
-	)
+					+ "ORDER BY n1.data"),
+	@NamedQuery(name="Noticia.porData",query="SELECT n FROM Noticia n WHERE n.data BETWEEN :dataInicio AND :dataFinal"),
+	@NamedQuery(name="Noticia.porTitulo",query="SELECT n FROM Noticia n WHERE n.titulo LIKE :titulo"),
+	@NamedQuery(name="Noticia.porAutor",query="SELECT n FROM Noticia n WHERE n.autor = :autor")
 })
 public class Noticia {
 	@Id @GeneratedValue

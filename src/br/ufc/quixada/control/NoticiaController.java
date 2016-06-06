@@ -2,6 +2,7 @@ package br.ufc.quixada.control;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -34,8 +35,39 @@ public class NoticiaController {
 	
 	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
 	@AccessLevel(2000)
+	@MenuSecoes
 	public void formulario(){
 	}
+	
+	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
+	@AccessLevel(2000)
+	public void buscar(){
+	}
+	
+	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
+	@AccessLevel(2000)
+	@Path("/noticia/buscar/data")
+	public List<Noticia> buscarPorData(Date dataInicio, Date dataFinal){
+		List<Noticia> noticiaList = dao.buscarPorData(dataInicio, dataFinal);
+		for(Noticia n: noticiaList)
+			System.out.println(n.getTitulo());
+		return noticiaList;
+	}
+	
+	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
+	@AccessLevel(2000)
+	@Path("/noticia/buscar/titulo")
+	public void buscarPorTitulo(Noticia noticia){
+		
+	}
+	
+	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
+	@AccessLevel(2000)
+	@Path("/noticia/buscar/autor")
+	public void buscarPorAutor(Noticia noticia){
+		
+	}
+	
 	
 	@Post
 	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})

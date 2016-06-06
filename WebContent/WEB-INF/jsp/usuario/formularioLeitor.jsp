@@ -13,7 +13,7 @@
 	<link href="<c:url value='/css/style.css'/>" rel="stylesheet">
 	<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
   
-	<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>">
+	<!--<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
   
 	<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>"> </script>
 	<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>

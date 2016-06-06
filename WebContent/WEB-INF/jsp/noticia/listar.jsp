@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>News!</title>
+<title>InfoJornal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -15,7 +15,7 @@
 <link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
 
 
-<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>">
+<!--<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
 
 <script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>">
 	

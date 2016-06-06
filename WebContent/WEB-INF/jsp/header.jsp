@@ -3,7 +3,7 @@
 		<div class="col-md-12 column">
 			<div class="page-header">
 				<h1>
-					<strong>QUIXADÁ News!</strong>  <small><em>Informação regional e mundial</em></small>
+					<strong>InfoJornal</strong>  <small><em>Informação nacional e regional</em></small>
 				</h1>
 			</div>
 			<nav class="navbar navbar-default" role="navigation">
@@ -102,6 +102,7 @@
          						<li class="dropdown" style="min-width:200px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${usuarioAutenticado.nome}<span class="caret"></span></a>
           							<ul class="dropdown-menu" role="menu" style="min-width: 200px">
             							<li><a href="<c:url value='/noticia/formulario'/>">Adicionar Notícia</a></li>
+            							<li><a href="<c:url value='/noticia/buscar'/>">Buscar Notícia</a></li>
            					 			<li class="divider"></li>
            					 			<li><a href="<c:url value='/autenticacao/logout'/>">Sair</a></li>
           							</ul>
@@ -116,8 +117,8 @@
 							<ul class="nav navbar-nav navbar-right">
          						<li class="dropdown" style="min-width:200px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${usuarioAutenticado.nome}<span class="caret"></span></a>
           							<ul class="dropdown-menu" role="menu" style="min-width: 200px">
-           					 			<!--<li><a href="<c:url value='/secao/formulario'/>">Adicionar Seção</a></li>-->
-           					 			<li><a href="#">Adicionar Seção</a></li>
+           					 			<li><a href="<c:url value='/secao/formulario'/>">Adicionar Seção</a></li>
+           					 			<!-- <li><a href="#">Adicionar Seção</a></li> -->
             							<li><a href="<c:url value='/usuario/formularioJornalista'/>">Adicionar Jornalista</a></li>
             							<!--<li><a href="<c:url value='/classificado/formulario'/>">Adicionar Classificado</a></li>-->
             							<li><a href="#">Adicionar Classificado</a></li>

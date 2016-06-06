@@ -1,5 +1,6 @@
 package br.ufc.quixada.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -26,6 +27,25 @@ public class NoticiaDAO implements INoticiaDAO{
 
 	public Noticia buscar(Long id) {
 		return manager.find(Noticia.class, id);
+	}
+	
+	public List<Noticia> buscarPorData(Date dataInicio, Date dataFinal){
+		TypedQuery<Noticia> query = manager.createNamedQuery("Noticia.porData", Noticia.class);
+		query.setParameter("dataInicio", dataInicio);
+		query.setParameter("dataFinal", dataFinal);
+		return query.getResultList();
+	}
+	
+	public List<Noticia> buscarPorTitulo(Noticia noticia){
+		TypedQuery<Noticia> query = manager.createNamedQuery("Noticia.porTitulo", Noticia.class);
+		query.setParameter("titulo", "%"+noticia.getTitulo()+"%");
+		return query.getResultList();
+	}
+	
+	public List<Noticia> buscarPorAutor(Noticia noticia){
+		TypedQuery<Noticia> query = manager.createNamedQuery("Noticia.porAutor", Noticia.class);
+		query.setParameter("autor", noticia.getAutor());
+		return query.getResultList();
 	}
 
 	public List<Noticia> listar() {
