@@ -157,6 +157,6 @@ public class NoticiaController {
 	@Get
 	@Path("/noticia/imagem/{noticia.imagem}")
 	public File imagemDownloader(Noticia noticia){
-		return new File("/home/ederson/uploads", noticia.getImagem());
+		return new File(AppConfig.HOME+"/uploads/", noticia.getImagem());
 	}
 }
