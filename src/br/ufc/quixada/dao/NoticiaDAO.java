@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import br.ufc.quixada.model.Noticia;
 import br.ufc.quixada.model.Secao;
+import br.ufc.quixada.model.Usuario;
 
 @RequestScoped
 public class NoticiaDAO implements INoticiaDAO{
@@ -19,6 +20,10 @@ public class NoticiaDAO implements INoticiaDAO{
 
 	public void adicionar(Noticia noticia) {
 		manager.persist(noticia);
+	}
+	
+	public void atualizar(Noticia noticia){
+		manager.merge(noticia);
 	}
 
 	public void remover(Noticia noticia) {
@@ -44,7 +49,8 @@ public class NoticiaDAO implements INoticiaDAO{
 	
 	public List<Noticia> buscarPorAutor(Noticia noticia){
 		TypedQuery<Noticia> query = manager.createNamedQuery("Noticia.porAutor", Noticia.class);
-		query.setParameter("autor", noticia.getAutor());
+		Usuario autor = manager.find(Usuario.class, noticia.getAutor().getId());
+		query.setParameter("autor", autor);
 		return query.getResultList();
 	}
 

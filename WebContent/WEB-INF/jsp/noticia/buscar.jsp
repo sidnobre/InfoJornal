@@ -32,17 +32,17 @@
 			<div class="tabbable" id="tabs-604805">
 				<ul class="nav nav-tabs">
 					<li class="active">
-						<a href="#panel-824432" data-toggle="tab">Por data</a>
+						<a href="#por-data-tab" data-toggle="tab">Por data</a>
 					</li>
 					<li >
-						<a href="#panel-862197" data-toggle="tab">Por título</a>
+						<a href="#por-titulo-tab" data-toggle="tab">Por título</a>
 					</li>
 					<li>
-						<a href="#panel-862198" data-toggle="tab">Por autor</a>
+						<a href="#por-autor-tab" data-toggle="tab">Por autor</a>
 					</li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane active" id="panel-824432">
+					<div class="tab-pane active" id="por-data-tab">
 						<form action="<c:url value='/noticia/buscar/por-data'/>" role="form" method="POST">
 							<div class="form-group">
       						<label for="inputDataInicio">Data do Início</label>
@@ -68,39 +68,39 @@
     						
     						<div class="form-group pull-right">
 								<button type="reset" class="btn btn-default">Cancelar</button>
-								<button type="submit" class="btn btn-primary">Enviar</button>
+								<button type="submit" class="btn btn-primary">Buscar</button>
 							</div>
     					</form>
 					</div>
-						<div class="tab-pane " id="panel-862197">
-							<form action="<c:url value='/secao/adicionar'/>"
-								class="row clearfix" role="form" method="POST">
-								<div class="col-md-4 column"></div>
-								<div class="col-md-4 column">
+						<div class="tab-pane " id="por-titulo-tab">
+							<form action="<c:url value='/noticia/buscar/por-titulo'/>" role="form" method="POST">
 									<div class="form-group">
 										<label for="inputTitulo">Titulo</label> <span
-											style="color: red;">${errors.from('secao.titulo.invalido')}</span>
+											style="color: red;">${errors.from('noticia.titulo.invalido')}</span>
 										<input class="form-control" id="inputTitulo"
-											name="secao.titulo" type="text" required="required">
-									</div>
-									<div class="form-group">
-										<label for="inputDescricao">Descrição</label> <span
-											style="color: red;">${errors.from('secao.descricao.invalida')}</span>
-										<input class="form-control" id="inputDescricao"
-											name="secao.descricao" type="text" required="required">
+											name="noticia.titulo" type="text" required="required">
 									</div>
 									<div class="form-group pull-right">
 										<button type="reset" class="btn btn-default">Cancelar</button>
-										<button type="submit" class="btn btn-primary">Enviar</button>
+										<button type="submit" class="btn btn-primary">Buscar</button>
 									</div>
-								</div>
-								<div class="col-md-4 column"></div>
 							</form>
 						</div>
-						<div class="tab-pane " id="panel-862198">
-						<p>
-							conteudo 3
-						</p>
+						<div class="tab-pane " id="por-autor-tab">
+							<form action="<c:url value='/noticia/buscar/por-autor'/>" role="form" method="POST">
+								<div class="form-group">
+									<label for="jornalistaSelect">Autor</label>
+									<select name="noticia.autor.id" id="jornalistaSelect">
+										<c:forEach items="${usuarioList}" var="usuariovar">
+											<option value="${usuariovar.id}">${usuariovar.nome}</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="form-group pull-right">
+									<button type="reset" class="btn btn-default">Cancelar</button>
+									<button type="submit" class="btn btn-primary">Buscar</button>
+								</div>
+							</form>
 					</div>
 				</div>
 			</div>

@@ -1,9 +1,13 @@
 package br.ufc.quixada.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -17,6 +21,8 @@ public class Papel {
 	private String descricao;
 	@Column(nullable=false)
 	private long nivel;
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	private List<Usuario> usuarios;
 	
 	public Long getId() {
 		return id;
@@ -35,6 +41,12 @@ public class Papel {
 	}
 	public void setNivel(long nivel) {
 		this.nivel = nivel;
+	}
+	public List<Usuario> getUsuarios(){
+		return usuarios;
+	}
+	public void setUsuarios(List<Usuario> usuarios){
+		this.usuarios = usuarios;
 	}
 	
 	public int hashCode() {

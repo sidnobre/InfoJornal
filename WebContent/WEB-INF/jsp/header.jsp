@@ -68,8 +68,6 @@
 					</div>
 					
 					<c:if test="${empty usuarioAutenticado or not usuarioAutenticado.autenticado}">
-						<!--<h3>Você não está autenticado no sistema.</h3>-->
-				
 						<ul class="nav navbar-nav navbar-right">
 							<li>
 								<a id="modal-577817" href="#modal-container-577817" role="button" class="btn" data-toggle="modal">LogIn</a>
@@ -118,7 +116,6 @@
          						<li class="dropdown" style="min-width:200px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${usuarioAutenticado.nome}<span class="caret"></span></a>
           							<ul class="dropdown-menu" role="menu" style="min-width: 200px">
            					 			<li><a href="<c:url value='/secao/formulario'/>">Adicionar Seção</a></li>
-           					 			<!-- <li><a href="#">Adicionar Seção</a></li> -->
             							<li><a href="<c:url value='/usuario/formularioJornalista'/>">Adicionar Jornalista</a></li>
             							<!--<li><a href="<c:url value='/classificado/formulario'/>">Adicionar Classificado</a></li>-->
             							<li><a href="#">Adicionar Classificado</a></li>

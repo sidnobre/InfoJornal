@@ -1,5 +1,7 @@
 package br.ufc.quixada.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -32,5 +34,11 @@ public class UsuarioDAO implements IUsuarioDAO{
 		query.setParameter("senha", usuario.getSenha());
 		if(query.getResultList().isEmpty()) return null;
 		return query.getSingleResult();
+	}
+	
+	public List<Usuario> buscarJornalistas(){
+		TypedQuery<Usuario> query = manager.createNamedQuery("usuario.jornalistas",Usuario.class);
+		query.setParameter("papel", 2L);
+		return query.getResultList();
 	}
 }

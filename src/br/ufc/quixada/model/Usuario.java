@@ -1,5 +1,6 @@
 package br.ufc.quixada.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,9 +17,12 @@ import javax.persistence.Table;
 @Table(name="usuarios")
 @NamedQueries({
 	@NamedQuery(name="usuario.porLogin",query="SELECT u FROM Usuario u WHERE u.login = :login"),
-	@NamedQuery(name="usuario.porLoginSenha", query="SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha")
+	@NamedQuery(name="usuario.porLoginSenha", query="SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha"),
+	@NamedQuery(name="usuario.jornalistas",query="SELECT u FROM Usuario u inner join u.papeis p where p.id = :papel")
+	
 })
-public class Usuario {
+public class Usuario implements Serializable{
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
 	private Long id;
 	@Column(nullable=false ,unique=true)
