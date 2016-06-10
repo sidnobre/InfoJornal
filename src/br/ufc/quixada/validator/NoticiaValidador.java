@@ -1,4 +1,4 @@
-package br.ufc.quixada.control;
+package br.ufc.quixada.validator;
 
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
@@ -8,9 +8,11 @@ import javax.inject.Inject;
 import br.com.caelum.vraptor.validator.Severity;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.ufc.quixada.control.NoticiaController;
 import br.ufc.quixada.model.Noticia;
 
 public class NoticiaValidador {
+	
 	private final String DATA_REGEX = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/([0-9]{4})$";
 	@Inject private Validator validador;
 	

@@ -19,6 +19,7 @@ import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Usuario;
 import br.ufc.quixada.security.AutenticacaoRule;
 import br.ufc.quixada.security.AutorizacaoRule;
+import br.ufc.quixada.validator.UsuarioValidador;
 
 @Controller
 public class UsuarioController {
@@ -33,7 +34,7 @@ public class UsuarioController {
 	
 	@NoPageCache
 	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(3000)
+	@AccessLevel(Papel.EDITOR_NIVEL)
 	public void formularioJornalista(){}
 	
 	@Post
@@ -41,10 +42,9 @@ public class UsuarioController {
 	public void adicionarLeitor(Usuario usuario){
 		usuarioValidador.validarFormulario(usuario);
 		String hash = DigestUtils.sha256Hex(usuario.getSenha());
-		System.out.println(hash);
 		usuario.setSenha(hash);
 		List<Papel> papeis = new ArrayList<Papel>();
-		papeis.add(pdao.buscar(1L));
+		papeis.add(pdao.buscar(Papel.LEITOR_ID));
 		usuario.setPapeis(papeis);
 		udao.adicionar(usuario);
 		usuarioValidador.confirmar();
@@ -54,23 +54,16 @@ public class UsuarioController {
 	@Post
 	@NoPageCache
 	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(3000)
+	@AccessLevel(Papel.EDITOR_NIVEL)
 	public void adicionarJornalista(Usuario usuario){
-		Usuario carregado = udao.buscarByLogin(usuario);
-		if(carregado!=null){
-			usuarioValidador.validarLogin(carregado);
-			carregado.getPapeis().add(pdao.buscar(2L));
-			udao.adicionar(carregado);
-		}else{
-			String hash = DigestUtils.sha256Hex(usuario.getSenha());
-			usuario.setSenha(hash);
-			usuarioValidador.validarFormulario(usuario);
-			List<Papel> papeis = new ArrayList<Papel>();
-			papeis.add(pdao.buscar(1L));
-			papeis.add(pdao.buscar(2L));
-			usuario.setPapeis(papeis);
-			udao.adicionar(usuario);
-		}
+		usuarioValidador.validarFormulario(usuario);
+		String hash = DigestUtils.sha256Hex(usuario.getSenha());
+		usuario.setSenha(hash);
+		List<Papel> papeis = new ArrayList<Papel>();
+		papeis.add(pdao.buscar(Papel.LEITOR_ID));
+		papeis.add(pdao.buscar(Papel.JORNALISTA_ID));
+		usuario.setPapeis(papeis);
+		udao.adicionar(usuario);
 		usuarioValidador.confirmar();
 		resultado.redirectTo(IndexController.class).index();
 	}

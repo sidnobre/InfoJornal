@@ -18,7 +18,6 @@ public class AutenticacaoHandler implements RuleHandler{
 
 	@Override
 	public void handle() {
-		System.out.println("INTERCEPTADO: AUTENTICACAO HANDLER");
 		validador.add(new SimpleMessage("autenticacao.invalida", "Usuário não autenticado! Por favor faça login.", Severity.ERROR));
 		resultado.forwardTo(IndexController.class).index();
 	}

@@ -1,4 +1,4 @@
-package br.ufc.quixada.control;
+package br.ufc.quixada.validator;
 
 import java.util.regex.Pattern;
 
@@ -7,11 +7,12 @@ import javax.inject.Inject;
 import br.com.caelum.vraptor.validator.Severity;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.ufc.quixada.control.UsuarioController;
 import br.ufc.quixada.model.Usuario;
 
 public class UsuarioValidador {
+	
 	private final String NOME_REGEX = "^[a-zA-Zà-úÀ-Ú]+[a-zA-Zà-úÀ-Ú ]*$";
-	//private final String NOME_REGEX = "^[a-zA-Z]+\\s*[a-zA-Z]*\\s*[a-zA-Z]*\\s*[a-zA-Z]*\\s*[a-zA-Z]*\\s*[a-zA-Z]*\\s*[a-zA-Z]*$";
 	private final String EMAIL_REGEX = "^[a-zA-Z]+[a-zA-Z0-9]*([._-]{0,1}[a-zA-Z0-9]+){0,3}@[a-zA-Z0-9]+.[a-zA-Z]+$";
 	private final String LOGIN_REGEX = "^([a-zA-Z]+[a-zA-Z0-9]*){4,20}$";
 	@Inject private Validator validador;

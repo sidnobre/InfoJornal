@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="papeis")
-@NamedQuery(name="papel.todos", query="SELECT p FROM Papel p")
+@NamedQuery(name="Papel.todos", query="SELECT p FROM Papel p")
 public class Papel {
 	@Id @GeneratedValue
 	private Long id;
@@ -23,6 +23,13 @@ public class Papel {
 	private long nivel;
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	private List<Usuario> usuarios;
+	
+	public static final Long LEITOR_ID = 1L;
+	public static final Long JORNALISTA_ID = 2L;
+	public static final Long EDITOR_ID = 3L;
+	public static final long LEITOR_NIVEL = 1000;
+	public static final long JORNALISTA_NIVEL = 2000;
+	public static final long EDITOR_NIVEL = 3000;
 	
 	public Long getId() {
 		return id;

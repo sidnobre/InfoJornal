@@ -10,8 +10,7 @@ import br.ufc.quixada.model.Usuario;
 
 public class UsuarioDAO implements IUsuarioDAO{
 	
-	@Inject
-	private EntityManager manager;
+	@Inject private EntityManager manager;
 
 	public void adicionar(Usuario usuario) {
 		manager.persist(usuario);
@@ -21,15 +20,15 @@ public class UsuarioDAO implements IUsuarioDAO{
 		return manager.find(Usuario.class, id);
 	}
 	
-	public Usuario buscarByLogin(Usuario usuario){
-		TypedQuery<Usuario> query = manager.createNamedQuery("usuario.porLogin", Usuario.class);
+	public Usuario buscarPorLogin(Usuario usuario){
+		TypedQuery<Usuario> query = manager.createNamedQuery("Usuario.porLogin", Usuario.class);
 		query.setParameter("login", usuario.getLogin());
 		if(query.getResultList().isEmpty()) return null;
 		return query.getSingleResult();
 	}
 	
-	public Usuario buscarByLoginSenha(Usuario usuario){
-		TypedQuery<Usuario> query = manager.createNamedQuery("usuario.porLoginSenha", Usuario.class);
+	public Usuario buscarPorLoginSenha(Usuario usuario){
+		TypedQuery<Usuario> query = manager.createNamedQuery("Usuario.porLoginSenha", Usuario.class);
 		query.setParameter("login", usuario.getLogin());
 		query.setParameter("senha", usuario.getSenha());
 		if(query.getResultList().isEmpty()) return null;
@@ -37,7 +36,7 @@ public class UsuarioDAO implements IUsuarioDAO{
 	}
 	
 	public List<Usuario> buscarJornalistas(){
-		TypedQuery<Usuario> query = manager.createNamedQuery("usuario.jornalistas",Usuario.class);
+		TypedQuery<Usuario> query = manager.createNamedQuery("Usuario.jornalistas",Usuario.class);
 		query.setParameter("papel", 2L);
 		return query.getResultList();
 	}

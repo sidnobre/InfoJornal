@@ -15,8 +15,7 @@ import br.ufc.quixada.model.Usuario;
 @RequestScoped
 public class NoticiaDAO implements INoticiaDAO{
 	
-	@Inject
-	private EntityManager manager;
+	@Inject private EntityManager manager;
 
 	public void adicionar(Noticia noticia) {
 		manager.persist(noticia);
@@ -30,8 +29,8 @@ public class NoticiaDAO implements INoticiaDAO{
 		manager.remove(noticia);
 	}
 
-	public Noticia buscar(Long id) {
-		return manager.find(Noticia.class, id);
+	public Noticia buscar(Noticia noticia) {
+		return manager.find(Noticia.class, noticia.getId());
 	}
 	
 	public List<Noticia> buscarPorData(Date dataInicio, Date dataFinal){

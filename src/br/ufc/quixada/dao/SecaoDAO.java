@@ -12,8 +12,7 @@ import br.ufc.quixada.model.Secao;
 @RequestScoped
 public class SecaoDAO implements ISecaoDAO{
 	
-	@Inject
-	private EntityManager manager;
+	@Inject private EntityManager manager;
 
 	public void adicionar(Secao secao) {
 		manager.persist(secao);

@@ -17,7 +17,6 @@ public class UsuarioSessao implements Serializable{
 	private Papel papel;
 	
 	public boolean isPermitido(long nivel){
-		//if(usuario==null) return false;
 		return papel.getNivel()==nivel;
 	}
 	

@@ -9,9 +9,11 @@ import br.com.caelum.brutauth.auth.annotations.SimpleBrutauthRules;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
 import br.ufc.quixada.dao.SecaoDAO;
+import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Secao;
 import br.ufc.quixada.security.AutenticacaoRule;
 import br.ufc.quixada.security.AutorizacaoRule;
+import br.ufc.quixada.validator.SecaoValidador;
 
 @Controller
 public class SecaoController {
@@ -21,12 +23,12 @@ public class SecaoController {
 	@Inject private Result result;
 	
 	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(3000)
+	@AccessLevel(Papel.EDITOR_NIVEL)
 	public void formulario(){
 	}
 	
 	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(3000)
+	@AccessLevel(Papel.EDITOR_NIVEL)
 	public void adicionar(Secao secao){
 		validador.validarFormulario(secao);
 		dao.adicionar(secao);

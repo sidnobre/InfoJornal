@@ -1,4 +1,4 @@
-package br.ufc.quixada.control;
+package br.ufc.quixada.validator;
 
 import java.util.regex.Pattern;
 
@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import br.com.caelum.vraptor.validator.Severity;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.ufc.quixada.control.SecaoController;
 import br.ufc.quixada.model.Secao;
 
 public class SecaoValidador{

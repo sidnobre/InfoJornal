@@ -31,6 +31,7 @@
 				</h1>
 			</div>
 		</div>
+		<div class="col-md-3 column"></div>
 		<div class="col-md-6 column well altura-min-form">
 			<h3 class="text-center text-mutted">
 				Ainda não possui cadastro no sistema
@@ -74,26 +75,7 @@
 				<button type="submit" class="btn btn-primary btn-lg pull-right">Enviar</button>
 			</form>
 		</div>
-		<div class="col-md-1 column"></div>
-		<div class="col-md-5 column well altura-min-form">
-			<h3 class="text-center text-mutted">
-				Já possui cadastro no sistema
-			</h3>
-			<form action="<c:url value='/usuario/adicionarJornalista' />" method="POST">
-				<div class="form-group">
-					<label for="inputLogin">LogIn</label>
-					<span style="color:red;">${errors.from('usuario.login.invalido')}</span>
-					 <div class="input-group">
-					 	<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-					 	<input class="form-control" id="inputLogin" type="text" name="usuario.login" required="required">
-					 	<span class="input-group-btn">
-					 		<button class="btn btn-default" type="button">Verificar</button>
-					 	</span>
-					 </div>
-				</div>
-				<button type="submit" class="btn btn-primary btn-lg pull-right">Enviar</button>
-			</form>
-		</div>
+		<div class="col-md-3 column"></div>
 	</div>
 </div>
 </body>

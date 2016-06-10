@@ -18,7 +18,6 @@ public class AutorizacaoHandler implements RuleHandler{
 	
 	@Override
 	public void handle() {
-		System.out.println("INTERCEPTADO: AUTORIZACAO HANDLER");
 		validador.add(new SimpleMessage("autorizacao.invalida", "Este usuário não tem permissão para executar esta ação! Por favor faça login.", Severity.ERROR));
 		resultado.forwardTo(IndexController.class).index();
 	}

@@ -12,16 +12,14 @@ import br.ufc.quixada.model.Papel;
 @RequestScoped
 public class PapelDAO implements IPapelDAO{
 
-	@Inject
-	private EntityManager manager;
+	@Inject private EntityManager manager;
 	
 	public Papel buscar(Long id) {
 		return manager.find(Papel.class, id);
 	}
-
-	public List<Papel> listar() {
-		TypedQuery<Papel> query = manager.createNamedQuery("papel.todos", Papel.class);
-		return query.getResultList();
-	}
 	
+	public List<Papel> listar() {
+		TypedQuery<Papel> query = manager.createNamedQuery("Papel.todos", Papel.class);
+		return query.getResultList();
+	}	
 }

@@ -1,3 +1,4 @@
+
 package br.ufc.quixada.control;
 
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import br.ufc.quixada.dao.UsuarioDAO;
 import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Usuario;
 import br.ufc.quixada.security.UsuarioSessao;
+import br.ufc.quixada.validator.AutenticacaoValidador;
 
 @Controller
 public class AutenticacaoController {
@@ -25,9 +27,8 @@ public class AutenticacaoController {
 	@Post
 	public void login(Usuario usuario, Long papel){
 		String hash = DigestUtils.sha256Hex(usuario.getSenha());
-		System.out.println(hash);
 		usuario.setSenha(hash);
-		Usuario usuarioCarregado = udao.buscarByLoginSenha(usuario);
+		Usuario usuarioCarregado = udao.buscarPorLoginSenha(usuario);
 		Papel papelCarregado = pdao.buscar(papel);
 		validador.validarAutenticacao(usuarioCarregado,papelCarregado);
 		
@@ -35,7 +36,7 @@ public class AutenticacaoController {
 		validador.confirmarLogin();
 		
 		resultado.redirectTo(IndexController.class).index();
-	};
+	}
 	
 	public void logout(){
 		usuarioSessao.desautenticar();

@@ -31,11 +31,10 @@
 		<div class="col-md-9 column">
 			<div class="row clearfix">
 				<c:import url="alerts.jsp"></c:import>
-				<h2 class="text-primary text-center">Ultimas Notícias</h2>
+				<h2 class="text-primary text-center">EM DESTAQUE</h2>
 				<c:forEach var="noticia" items="${noticiaList}">
 					<div class="col-md-4 column altura-min">
 						<a href="<c:url value="/noticia/ler/${noticia.id}"/>">
-							<!--<img class="img-rounded center-block" alt="140x140" width="140" height="140" src="<c:url value='/uploads/${noticia.imagem}'/>">-->
 							<img class="img-rounded center-block" alt="140x140" width="140" height="140" src="<c:url value='/noticia/imagem/${noticia.imagem}'/>">
 						</a>
 						<h3 class="text-primary text-center">
@@ -47,13 +46,6 @@
 					</div>
 				</c:forEach>
 			</div>
-			<!--<nav>
-  				<ul class="pager" style="padding-top:30px;">
-    				<li><a href="#">Anterior</a></li>
-    				<li><a href="#">Próximo</a></li>
-  				</ul>
-			</nav>-->
-			<!-- <a href="<c:url value='/noticia/formulario'/>">Adicionar Notícia</a>-->
 		</div>
 	</div>
 	

@@ -14,8 +14,7 @@ import br.ufc.quixada.annotation.NoPageCache;
 @AcceptsWithAnnotations(NoPageCache.class)
 public class NoPageCacheInterceptor {
 	
-	@Inject
-	private HttpServletResponse response;
+	@Inject private HttpServletResponse response;
 	
 	@BeforeCall
 	public void intercept(){
@@ -29,7 +28,5 @@ public class NoPageCacheInterceptor {
 		
 		// HTTP/1.0
 		response.setHeader("Pragma", "no-cache");
-		
-		System.out.println("INTERCEPTADO: NO PAGE CACHE");
 	}
 }

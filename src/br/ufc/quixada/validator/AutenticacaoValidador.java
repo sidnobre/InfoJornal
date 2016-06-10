@@ -1,10 +1,11 @@
-package br.ufc.quixada.control;
+package br.ufc.quixada.validator;
 
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.validator.Severity;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.ufc.quixada.control.IndexController;
 import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Usuario;
 
