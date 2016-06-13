@@ -33,9 +33,6 @@
 		</div>
 		<div class="col-md-3 column"></div>
 		<div class="col-md-6 column well altura-min-form">
-			<h3 class="text-center text-mutted">
-				Ainda não possui cadastro no sistema
-			</h3>
 			<form action="<c:url value='/usuario/adicionarJornalista'/>" role="form" method="POST">
 				<div class="form-group">
 					 <label for="inputNome">Nome completo</label>

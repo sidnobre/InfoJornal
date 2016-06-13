@@ -86,8 +86,7 @@
 						<small><cite>${noticia.autor.nome}</cite></small>
 					</blockquote>
 					<c:if test="${(usuarioAutenticado.usuario.id == noticia.autor.id and usuarioAutenticado.papel.nivel == 2000) or usuarioAutenticado.papel.nivel == 3000}">
-						<!-- <a id="modal-65558" class="btn btn-primary" role="button" href="#modal-container-65558" data-toggle="modal">Remover Notícia</a> -->
-						<a id="modal-65558" class="btn btn-primary" role="button" href="#" data-toggle="modal">Remover Notícia</a>
+						<a id="modal-65558" class="btn btn-primary" role="button" href="#modal-container-65558" data-toggle="modal">Remover Notícia</a>
 						<div class="modal fade" id="modal-container-65558" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -107,7 +106,7 @@
 								</div>
 							</div>
 						</div>
-						<!--<a class="btn btn-primary" role="button" href="<c:url value='/usuario/remover/${noticia.id}'/>">Remover Notícia</a>-->
+						<a class="btn btn-primary" role="button" href="<c:url value='/usuario/remover/${noticia.id}'/>">Remover Notícia</a>
 					</c:if>
 				</div>
 			</div>
@@ -122,12 +121,6 @@
 				<div class="col-md-1 column"></div>
 				<div class="col-md-5 column">
 					<h2>Comentários</h2>
-					<!--<script type="text/javascript">
-						jQuery(document).ready(function() {
-  							jQuery('#fbcomments').attr('data-href', document.domain + window.location.pathname);
-						});
-					</script>
-					<div id="fbcomments" class="fb-comments" data-href="" data-numposts="3" data-colorscheme="light"></div>-->
 				<div class="col-md-1 column"></div>
 			</div>
 		</div>
