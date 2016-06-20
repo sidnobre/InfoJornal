@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="noticias")
@@ -35,6 +37,7 @@ public class Noticia {
 	@Column(columnDefinition="TEXT", nullable=false)
 	private String texto;
 	@Column(nullable=false)
+	@Temporal(TemporalType.DATE)
 	private Date data;
 	@Column(nullable=false)
 	private String imagem;

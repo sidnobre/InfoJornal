@@ -15,6 +15,10 @@ public class UsuarioDAO implements IUsuarioDAO{
 	public void adicionar(Usuario usuario) {
 		manager.persist(usuario);
 	}
+	
+	public void atualizar(Usuario usuario){
+		manager.merge(usuario);
+	}
 
 	public Usuario buscar(Long id) {
 		return manager.find(Usuario.class, id);
@@ -23,6 +27,13 @@ public class UsuarioDAO implements IUsuarioDAO{
 	public Usuario buscarPorLogin(Usuario usuario){
 		TypedQuery<Usuario> query = manager.createNamedQuery("Usuario.porLogin", Usuario.class);
 		query.setParameter("login", usuario.getLogin());
+		if(query.getResultList().isEmpty()) return null;
+		return query.getSingleResult();
+	}
+	
+	public Usuario buscarPorEmail(Usuario usuario){
+		TypedQuery<Usuario> query = manager.createNamedQuery("Usuario.porEmail", Usuario.class);
+		query.setParameter("email", usuario.getEmail());
 		if(query.getResultList().isEmpty()) return null;
 		return query.getSingleResult();
 	}

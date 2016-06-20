@@ -3,21 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Formulário</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  	<title>Formulário</title>
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<meta name="description" content="">
   	<meta name="author" content="">
 
 	<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
-	<link href="<c:url value='/css/style.css'/>" rel="stylesheet">
 	<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
   
 	<!--<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
   
 	<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>"> </script>
 	<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/scripts.js'/>"></script>
 </head>
 
 <body>

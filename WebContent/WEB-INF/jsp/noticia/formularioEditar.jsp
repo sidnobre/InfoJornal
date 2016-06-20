@@ -4,27 +4,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>InfoJornal</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+	<title>InfoJornal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/style.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/img-preview.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/bootstrap-select.min.css'/>" rel="stylesheet">
 
+	<!--<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
 
-<!--<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
-
-<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>">
-	
-</script>
-<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/scripts.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/jquery.maskedinput.min.js'/>"></script>
-
+	<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/jquery.maskedinput.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/simple-img-preview.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/ckeditor/ckeditor.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/bootstrap-select.min.js'/>"></script>
 </head>
+
 <body>
 <div class="container">
 	<c:import url="../header.jsp"></c:import>
@@ -39,8 +39,8 @@
 						<input type="hidden" name="autor.id" value="${noticia.autor.id}" />
 						<input type="hidden" name="noticia.id" value="${noticia.id}" />
 						<div class="form-group">
-							<label for="selectSecao">Seção</label>
-							<select name="secao.id" id="selectSecao">
+							<label for="selectSecao">Seção</label><br>
+							<select name="secao.id" id="selectSecao" class="selectpicker" data-style="btn-primary">
 								<c:forEach items="${secaoList}" var="secaovar">
 									<option value="${secaovar.id}">${secaovar.titulo}</option>
 								</c:forEach>
@@ -61,18 +61,35 @@
         					<script type="text/javascript">
         						jQuery(function($){
        								$("#inputData").mask("99/99/9999");
+       								$("#testeData").mask("99/99/9999");
 								});
         					</script>
     					</div>
+    					
+    					<div class="form-group">
+            				<img class="block-center img-rounded" id="imagemPreview" src="<c:url value='/noticia/imagem/${noticia.imagem}'/>" style="width: 300px; height: 300px;" />
+            			</div>
+						
 						<div class="form-group">
-							 <label for="inputImagem">Imagem</label>
-							 <input id="inputImagem" name="imagem" type="file" required="required" value="${noticia.imagem}">
-						</div>
+            				<div class="input-group">
+								<input type="file" id="inputImagem" name="imagem" style="display:none" value="<c:url value='/noticia/imagem/${noticia.imagem}'/>" onchange="PreviewImagem();">
+								<input type="hidden" name="noticia.imagem" value="${noticia.imagem}"/>
+								<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="Nenhuma imagem selecionada" class="form-control">
+								<span class="input-group-btn">
+									<button id="fake-file-button-browse" type="button" class="btn btn-default" onclick="InputImagemClick();">
+										<span class="glyphicon glyphicon-folder-open"> Procurar</span>
+									</button>
+								</span>
+							</div>
+            			</div>
 				</div>
 				<div class="col-md-5 column">
 					<div class="form-group">
       					<label for="inputTexto">Texto</label>
-        				<textarea class="form-control" name="noticia.texto" rows="10" id="inputTexto" required="required">${notica.texto}</textarea>
+        				<textarea class="form-control" name="noticia.texto" rows="25" id="inputTexto" required="required">${noticia.texto}</textarea>
+        				<script type="text/javascript">
+        					CKEDITOR.replace('inputTexto');
+        				</script>
     				</div>
     				<div class="form-group pull-right">
         					<button type="reset" class="btn btn-default">Cancelar</button>

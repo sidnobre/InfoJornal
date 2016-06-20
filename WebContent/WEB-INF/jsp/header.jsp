@@ -53,7 +53,10 @@
 										</div>
 										<div class="modal-footer">
 											<div class="form-group">
-												<div class="col-sm-offset-2 col-sm-10">
+												<div class="col-sm-3">
+													<a href="<c:url value='/usuario/esqueciSenha'/>" type="button" class="btn btn-warning btn-xs">Esqueci minha senha</a>
+												</div>
+												<div class="col-sm-offset-2 col-sm-7">
 													<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						 							<button type="submit" class="btn btn-primary">LogIn</button>
 												</div>
@@ -65,7 +68,7 @@
 						</div>
 					</div>
 					
-					<c:if test="${empty usuarioAutenticado or not usuarioAutenticado.autenticado}">
+					<c:if test="${empty usuarioSessao or not usuarioSessao.autenticado}">
 						<ul class="nav navbar-nav navbar-right">
 							<li>
 								<a id="modal-577817" href="#modal-container-577817" role="button" class="btn" data-toggle="modal">LogIn</a>
@@ -76,50 +79,55 @@
 						</ul>
 					</c:if>
 					
-					<c:if test="${usuarioAutenticado.autenticado}">
-						<c:if test="${usuarioAutenticado.papel.nivel == 1000}">
+					<c:if test="${usuarioSessao.autenticado}">
+						<c:if test="${usuarioSessao.papel.nivel == 1000}">
 							<ul class="nav navbar-nav navbar-right">
-         						<li class="dropdown" style="min-width:175px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> ${usuarioAutenticado.nome}<span class="caret"></span></a>
+         						<li class="dropdown" style="min-width:175px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> ${usuarioSessao.nome}<span class="caret"></span></a>
           							<ul class="dropdown-menu" role="menu" style="min-width: 175px">
+          								<li><a href="<c:url value='/usuario/perfil'/>">Perfil do usuário</a></li>
+          								<li class="divider"></li>
            					 			<li><a href="<c:url value='/autenticacao/logout'/>">Sair</a></li>
           							</ul>
           						</li>
           						<li>
-          							<a>[ ${usuarioAutenticado.papel.descricao} ]</a>
+          							<a>[ ${usuarioSessao.papel.descricao} ]</a>
           						</li>
         					</ul>
 						</c:if>
 						
-						<c:if test="${usuarioAutenticado.papel.nivel == 2000}">
+						<c:if test="${usuarioSessao.papel.nivel == 2000}">
 							<ul class="nav navbar-nav navbar-right">
-         						<li class="dropdown" style="min-width:200px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> ${usuarioAutenticado.nome}<span class="caret"></span></a>
+         						<li class="dropdown" style="min-width:200px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> ${usuarioSessao.nome}<span class="caret"></span></a>
           							<ul class="dropdown-menu" role="menu" style="min-width: 200px">
             							<li><a href="<c:url value='/noticia/formulario'/>">Adicionar Notícia</a></li>
             							<li><a href="<c:url value='/noticia/buscar'/>">Buscar Notícia</a></li>
+            							<li><a href="<c:url value='/usuario/perfil'/>">Perfil do usuário</a></li>
            					 			<li class="divider"></li>
            					 			<li><a href="<c:url value='/autenticacao/logout'/>">Sair</a></li>
           							</ul>
           						</li>
           						<li>
-          							<a>[ ${usuarioAutenticado.papel.descricao} ]</a>
+          							<a>[ ${usuarioSessao.papel.descricao} ]</a>
           						</li>
         					</ul>
 						</c:if>
 						
-						<c:if test="${usuarioAutenticado.papel.nivel == 3000}">
+						<c:if test="${usuarioSessao.papel.nivel == 3000}">
 							<ul class="nav navbar-nav navbar-right">
-         						<li class="dropdown" style="min-width:200px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> ${usuarioAutenticado.nome}<span class="caret"></span></a>
+         						<li class="dropdown" style="min-width:200px"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> ${usuarioSessao.nome}<span class="caret"></span></a>
           							<ul class="dropdown-menu" role="menu" style="min-width: 200px">
            					 			<li><a href="<c:url value='/secao/formulario'/>">Adicionar Seção</a></li>
+           					 			<li><a href="<c:url value='/noticia/buscar'/>">Buscar Notícia</a></li>
             							<li><a href="<c:url value='/usuario/formularioJornalista'/>">Adicionar Jornalista</a></li>
+            							<li><a href="<c:url value='/usuario/formularioEditor'/>">Adicionar Editor</a></li>
             							<li><a href="<c:url value='/classificado/formulario'/>">Adicionar Classificado</a></li>
-            							<li><a href="#">Adicionar Classificado</a></li>
+            							<li><a href="<c:url value='/usuario/perfil'/>">Perfil do usuário</a></li>
            					 			<li class="divider"></li>
            					 			<li><a href="<c:url value='/autenticacao/logout'/>">Sair</a></li>
           							</ul>
           						</li>
           						<li>
-          							<a>[ ${usuarioAutenticado.papel.descricao} ]</a>
+          							<a>[ ${usuarioSessao.papel.descricao} ]</a>
           						</li>
         					</ul>
 						</c:if>

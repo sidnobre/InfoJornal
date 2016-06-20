@@ -7,8 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.caelum.brutauth.auth.annotations.AccessLevel;
-import br.com.caelum.brutauth.auth.annotations.SimpleBrutauthRules;
+import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -19,11 +18,11 @@ import br.ufc.quixada.dao.NoticiaDAO;
 import br.ufc.quixada.dao.SecaoDAO;
 import br.ufc.quixada.dao.UsuarioDAO;
 import br.ufc.quixada.model.Noticia;
-import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Secao;
 import br.ufc.quixada.model.Usuario;
 import br.ufc.quixada.security.AutenticacaoRule;
-import br.ufc.quixada.security.AutorizacaoRule;
+import br.ufc.quixada.security.JornalistaEditorRule;
+import br.ufc.quixada.security.JornalistaRule;
 import br.ufc.quixada.util.AppConfig;
 import br.ufc.quixada.validator.NoticiaValidador;
 
@@ -36,45 +35,39 @@ public class NoticiaController {
 	@Inject private Result resultado;
 	@Inject private NoticiaValidador validador;
 	
-	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(Papel.JORNALISTA_NIVEL)
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaRule.class})
 	public void formulario(){
 		resultado.include("secaoList", sdao.listar());
 	}
 	
-	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(Papel.JORNALISTA_NIVEL)
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
 	@Path("/noticia/editar/{noticia.id}")
 	public Noticia formularioEditar(Noticia noticia){
 		resultado.include("secaoList", sdao.listar());
 		return ndao.buscar(noticia);
 	}
 	
-	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(Papel.JORNALISTA_NIVEL)
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
 	public void buscar(){
 		List<Usuario> usuarioList = udao.buscarJornalistas();
 		resultado.include("usuarioList", usuarioList);
 	}
 	
-	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(Papel.JORNALISTA_NIVEL)
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
 	@Path("/noticia/buscar/por-data")
 	public void buscarPorData(Date dataInicio, Date dataFinal){
 		List<Noticia> noticiaList = ndao.buscarPorData(dataInicio, dataFinal);
 		resultado.redirectTo(this).resultadoBusca(noticiaList);
 	}
 	
-	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(Papel.JORNALISTA_NIVEL)
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
 	@Path("/noticia/buscar/por-titulo")
 	public void buscarPorTitulo(Noticia noticia){
 		List<Noticia> noticiaList = ndao.buscarPorTitulo(noticia);
 		resultado.redirectTo(this).resultadoBusca(noticiaList);
 	}
 	
-	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(Papel.JORNALISTA_NIVEL)
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
 	@Path("/noticia/buscar/por-autor")
 	public void buscarPorAutor(Noticia noticia){
 		List<Noticia> noticiaList = ndao.buscarPorAutor(noticia);
@@ -87,8 +80,7 @@ public class NoticiaController {
 	
 	
 	@Post
-	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(Papel.JORNALISTA_NIVEL)
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaRule.class})
 	public void adicionar(Noticia noticia, Secao secao,Usuario autor, UploadedFile imagem){
 		File arquivo = new File(AppConfig.HOME+"/uploads/", imagem.getFileName());
 		try {
@@ -107,16 +99,17 @@ public class NoticiaController {
 	
 	@Post
 	@Path("/noticia/atualizar")
-	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(Papel.JORNALISTA_NIVEL)
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
 	public void atualizar(Noticia noticia, Secao secao,Usuario autor, UploadedFile imagem){
-		File arquivo = new File(AppConfig.HOME+"/uploads/", imagem.getFileName());
-		try {
-			imagem.writeTo(arquivo);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(imagem != null){
+			try {
+				File arquivo = new File(AppConfig.HOME+"/uploads/", imagem.getFileName());
+				imagem.writeTo(arquivo);
+				noticia.setImagem(arquivo.getName());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		noticia.setImagem(arquivo.getName());
 		noticia.setSecao(secao);
 		noticia.setAutor(autor);
 		validador.validarFormulario(noticia);
@@ -127,8 +120,7 @@ public class NoticiaController {
 	
 	@Get
 	@Path("/noticia/remover/{noticia.id}")
-	@SimpleBrutauthRules({AutenticacaoRule.class, AutorizacaoRule.class})
-	@AccessLevel(Papel.JORNALISTA_NIVEL)
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
 	public void remover(Noticia noticia){
 		ndao.remover(ndao.buscar(noticia));
 		validador.confirmaRemocao();

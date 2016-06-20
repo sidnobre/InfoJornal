@@ -4,24 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>InfoJornal</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+	<title>InfoJornal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/style.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
 
+	<!-- <link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
 
-<!-- <link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
-
-<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/scripts.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/jquery.maskedinput.min.js'/>"></script>
-
+	<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/jquery.maskedinput.min.js'/>"></script>
 </head>
 
 <body>
@@ -55,12 +51,43 @@
 							<td>
 								<fmt:formatDate value="${noticia.data}" pattern="dd/MM/yyyy"/>
 							</td>
-							<td>
-								<a class="btn btn-sm btn-block btn-success" role="button" href="<c:url value='/noticia/editar/${noticia.id}'/>" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></a>
-							</td>
-							<td>
-								<a id="modal-65558" class="btn btn-sm btn-block btn-danger disabled" role="button" href="#" data-toggle="modal"><span class="lyphicon glyphicon-trash"></span></a>
-							</td>
+							<c:choose>
+								<c:when test="${(usuarioSessao.usuario.id == noticia.autor.id and usuarioSessao.papel.nivel == 2000) or usuarioSessao.papel.nivel == 3000}">
+									<td>
+										<a class="btn btn-sm btn-block btn-success" role="button" href="<c:url value='/noticia/editar/${noticia.id}'/>" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></a>
+									</td>
+									<td>
+										<a id="modal-${noticia.id}" class="btn btn-sm btn-block btn-danger" role="button" href="#modal-container-${noticia.id}" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></a>
+										<div class="modal fade" id="modal-container-${noticia.id}" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+							 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+														<h4 class="modal-title" id="myModalLabel">Confirmação</h4>
+													</div>
+													<div class="modal-body">
+														Confirma a remoção da notícia?
+													</div>
+													<div class="modal-footer">
+														<form action="<c:url value='/noticia/remover/${noticia.id}'/>">
+															<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+															<button type="submit" class="btn btn-danger">Remover</button>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>
+								</c:when>
+								<c:otherwise>
+									<td>
+										<a class="btn btn-sm btn-block btn-success disabled" role="button" href="#" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></a>
+									</td>
+									<td>
+										<a class="btn btn-sm btn-block btn-danger disabled" role="button" href="#" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></a>
+									</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 					</c:forEach>	
 				</tbody>

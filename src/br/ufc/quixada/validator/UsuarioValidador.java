@@ -38,14 +38,23 @@ public class UsuarioValidador {
 	
 	public void validarLogin(Usuario usuario){
 		String erroLogin = "deve iniciar com letras e possuir no mínimo 4 caracteres";
-		
 		boolean loginValido = Pattern.compile(LOGIN_REGEX).matcher(usuario.getLogin()).matches();
-		
 		validador.ensure(loginValido, new SimpleMessage("usuario.nome.invalido", erroLogin, Severity.ERROR));
 		validador.onErrorUsePageOf(UsuarioController.class).formularioLeitor();
 	}
 	
+	public void validarConta(Usuario usuario){
+		String erroConta = "Nenhum usuário cadastrado com este e-mail.";
+		boolean contaValida = usuario != null;
+		validador.ensure(contaValida, new SimpleMessage("usuario.conta.invalida", erroConta, Severity.ERROR));
+		validador.onErrorUsePageOf(UsuarioController.class).esqueciSenha();
+	}
+	
 	public void confirmar(){
 		validador.add(new SimpleMessage("usuario.adicionado", "Usuário foi adicionado com sucesso!", Severity.SUCCESS));
+	}
+	
+	public void confirmarReset(){
+		validador.add(new SimpleMessage("usuario.senha.resetada", "Uma mensagem contendo a nova senha de acesso foi enviada para seu e-mail.", Severity.SUCCESS));
 	}
 }

@@ -11,42 +11,15 @@
 	<meta name="author" content="">
 	
 	<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/style.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
 
+	<!-- <link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
 
-<!-- <link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
-
-<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>">
-	
-</script>
-<script type="text/javascript"
-	src="<c:url value='/js/bootstrap.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/scripts.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
 </head>
+
 <body>
-
-<div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1666563520239765',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/pt_BR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-
-
 	<div class="container">
 	<c:import url="../header.jsp"></c:import>
 	<div class="row clearfix fundo" style="padding-bottom:35px;">
@@ -85,8 +58,9 @@
 					<blockquote class="pull-left">
 						<small><cite>${noticia.autor.nome}</cite></small>
 					</blockquote>
-					<c:if test="${(usuarioAutenticado.usuario.id == noticia.autor.id and usuarioAutenticado.papel.nivel == 2000) or usuarioAutenticado.papel.nivel == 3000}">
-						<a id="modal-65558" class="btn btn-primary" role="button" href="#modal-container-65558" data-toggle="modal">Remover Notícia</a>
+					<c:if test="${(usuarioSessao.usuario.id == noticia.autor.id and usuarioSessao.papel.nivel == 2000) or usuarioSessao.papel.nivel == 3000}">
+						<a id="modal-65558" class="btn btn-danger" role="button" href="#modal-container-65558" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span> Remover</a>
+						<a class="btn btn-success" role="button" href="<c:url value='/noticia/editar/${noticia.id}'/>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
 						<div class="modal fade" id="modal-container-65558" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -100,13 +74,12 @@
 									<div class="modal-footer">
 										<form action="<c:url value='/noticia/remover/${noticia.id}'/>">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-											<button type="submit" class="btn btn-primary">Remover</button>
+											<button type="submit" class="btn btn-danger">Remover</button>
 										</form>
 									</div>
 								</div>
 							</div>
 						</div>
-						<a class="btn btn-primary" role="button" href="<c:url value='/usuario/remover/${noticia.id}'/>">Remover Notícia</a>
 					</c:if>
 				</div>
 			</div>
@@ -117,11 +90,13 @@
 					</p>
 				</div>
 			</div>
+			
 			<div class="row clearfix">
-				<div class="col-md-1 column"></div>
-				<div class="col-md-5 column">
-					<h2>Comentários</h2>
-				<div class="col-md-1 column"></div>
+				<div class="col-md-2 column"></div>
+				<div class="col-md-8 column">
+					<h2>Comentários</h2>			
+					
+				<div class="col-md-2 column"></div>
 			</div>
 		</div>
 	</div>

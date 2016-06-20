@@ -1,18 +1,16 @@
 package br.ufc.quixada.security;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import br.com.caelum.brutauth.auth.annotations.HandledBy;
-import br.com.caelum.brutauth.auth.rules.SimpleBrutauthRule;
+import br.com.caelum.brutauth.auth.rules.CustomBrutauthRule;
 
-@RequestScoped
 @HandledBy(AutenticacaoHandler.class)
-public class AutenticacaoRule implements SimpleBrutauthRule{
+public class AutenticacaoRule implements CustomBrutauthRule{
 	
-	@Inject private UsuarioSessao usuarioAutenticado;
+	@Inject private UsuarioSessao usuarioSessao;
 
-	public boolean isAllowed(long nivel) {
-		return usuarioAutenticado.isAutenticado();
+	public boolean isAllowed() {
+		return usuarioSessao.getUsuario() != null && usuarioSessao.getPapel() != null;
 	}
 }

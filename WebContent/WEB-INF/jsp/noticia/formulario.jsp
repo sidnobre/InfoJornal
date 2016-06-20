@@ -3,27 +3,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>InfoJornal</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+	<title>InfoJornal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/style.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/img-preview.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/bootstrap-select.min.css'/>" rel="stylesheet">
 
+	<!--<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
 
-<!--<link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
-
-<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>">
+	<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/jquery.maskedinput.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/simple-img-preview.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/ckeditor/ckeditor.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/bootstrap-select.min.js'/>"></script>
 	
-</script>
-<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/scripts.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/jquery.maskedinput.min.js'/>"></script>
-
 </head>
+
 <body>
 <div class="container">
 	<c:import url="../header.jsp"></c:import>
@@ -35,10 +36,11 @@
 			<form action="<c:url value='/noticia/adicionar'/>" class="row clearfix" role="form" method="POST" enctype="multipart/form-data">
 				<div class="col-md-1 column"></div>
 				<div class="col-md-5 column">
-						<input type="hidden" name="autor.id" value="${usuarioAutenticado.usuario.id}" />
+						<input type="hidden" name="autor.id" value="${usuarioSessao.usuario.id}" />
+        				<!-- <input type="hidden" class="form-control" id="request-block" name="block" required="required"> -->
 						<div class="form-group">
-							<label for="selectSecao">Seção</label>
-							<select name="secao.id" id="selectSecao">
+							<label for="selectSecao">Seção</label><br>
+            				<select name="secao.id" id="selectSecao" class="selectpicker" data-style="btn-primary">
 								<c:forEach items="${secaoList}" var="secaovar">
 									<option value="${secaovar.id}">${secaovar.titulo}</option>
 								</c:forEach>
@@ -62,19 +64,43 @@
 								});
         					</script>
     					</div>
+						
+						
 						<div class="form-group">
-							 <label for="inputImagem">Imagem</label>
-							 <input id="inputImagem" name="imagem" type="file" required="required">
-						</div>
+            				<img class="block-center img-rounded" id="imagemPreview" src="<c:url value='/img/img-placeholder.png'/>" style="width: 300px; height: 300px;" />
+            			</div>
+						
+						<div class="form-group">
+            				<div class="input-group">
+								<input type="file" id="inputImagem" name="imagem" style="display:none" onchange="PreviewImagem();">
+								<input type="text" id="fake-file-input-name" disabled="disabled" placeholder="Nenhuma imagem selecionada" class="form-control">
+								<span class="input-group-btn">
+									<button id="fake-file-button-browse" type="button" class="btn btn-default" onclick="InputImagemClick();">
+										<span class="glyphicon glyphicon-folder-open"> Procurar</span>
+									</button>
+								</span>
+							</div>
+            			</div>
+						
+						
 				</div>
 				<div class="col-md-5 column">
 					<div class="form-group">
       					<label for="inputTexto">Texto</label>
-        				<textarea class="form-control" name="noticia.texto" rows="10" id="inputTexto" required="required"></textarea>
+        				<!--<textarea class="form-control" name="noticia.texto" rows="25" id="inputTexto" required="required"></textarea> -->
+        				<textarea id="inputTexto" name="noticia.texto" data-editor="true" rows="25" class="form-control" required="required"></textarea>
+        				<script type="text/javascript">
+        					CKEDITOR.replace('inputTexto');
+        				</script>
+        				
+        				<!-- <script type="text/javascript">
+        					editor();
+        					htmlEditor('#inputTexto', '<b><i>Digite o texto da notícia aqui...</i></b>');
+        				</script> -->
     				</div>
     				<div class="form-group pull-right">
         					<button type="reset" class="btn btn-default">Cancelar</button>
-        					<button type="submit" class="btn btn-primary">Enviar</button>
+        					<button id="submit-btn" type="submit" class="btn btn-primary">Enviar</button>
     				</div>
 				</div>
 				<div class="col-md-1 column"></div>

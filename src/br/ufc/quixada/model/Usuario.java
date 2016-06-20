@@ -17,6 +17,7 @@ import javax.persistence.Table;
 @Table(name="usuarios")
 @NamedQueries({
 	@NamedQuery(name="Usuario.porLogin",query="SELECT u FROM Usuario u WHERE u.login = :login"),
+	@NamedQuery(name="Usuario.porEmail",query="SELECT u FROM Usuario u WHERE u.email = :email"),
 	@NamedQuery(name="Usuario.porLoginSenha", query="SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha"),
 	@NamedQuery(name="Usuario.jornalistas",query="SELECT u FROM Usuario u INNER JOIN u.papeis p WHERE p.id = :papel")
 	

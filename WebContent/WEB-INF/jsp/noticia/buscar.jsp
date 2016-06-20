@@ -3,24 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>InfoJornal</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+	<title>InfoJornal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/style.css'/>" rel="stylesheet">
-<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/bootstrap-select.min.css'/>" rel="stylesheet">
 
+	<!-- <link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
 
-<!-- <link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
-
-<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/scripts.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/jquery.maskedinput.min.js'/>"></script>
-
+	<script type="text/javascript" src="<c:url value='/js/jquery.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/bootstrap.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/jquery.maskedinput.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/bootstrap-select.min.js'/>"></script>
 </head>
 
 <body>
@@ -89,8 +87,8 @@
 						<div class="tab-pane " id="por-autor-tab">
 							<form action="<c:url value='/noticia/buscar/por-autor'/>" role="form" method="POST">
 								<div class="form-group">
-									<label for="jornalistaSelect">Autor</label>
-									<select name="noticia.autor.id" id="jornalistaSelect">
+									<label for="jornalistaSelect">Autor</label><br>
+									<select name="noticia.autor.id" id="jornalistaSelect" class="selectpicker" data-style="btn-primary">
 										<c:forEach items="${usuarioList}" var="usuariovar">
 											<option value="${usuariovar.id}">${usuariovar.nome}</option>
 										</c:forEach>
