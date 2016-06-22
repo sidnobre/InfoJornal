@@ -33,14 +33,22 @@
 			<h3 class="text-center text-primary">
 				Editar notícia
 			</h3>
+			<c:if test="${not empty errors}">
+				<div class="alert alert-dismissible alert-danger">
+  					<button type="button" class="close" data-dismiss="alert">×</button>
+        			<c:forEach var="error" items="${errors}">
+            			<p class="text-center "><strong>${error.message}</strong></p>
+        			</c:forEach>
+    			</div>
+			</c:if>
 			<form action="<c:url value='/noticia/atualizar'/>" class="row clearfix" role="form" method="POST" enctype="multipart/form-data">
 				<div class="col-md-1 column"></div>
 				<div class="col-md-5 column">
-						<input type="hidden" name="autor.id" value="${noticia.autor.id}" />
+						<input type="hidden" name="noticia.autor.id" value="${noticia.autor.id}" />
 						<input type="hidden" name="noticia.id" value="${noticia.id}" />
 						<div class="form-group">
 							<label for="selectSecao">Seção</label><br>
-							<select name="secao.id" id="selectSecao" class="selectpicker" data-style="btn-primary">
+							<select name="noticia.secao.id" id="selectSecao" class="selectpicker" data-style="btn-primary">
 								<c:forEach items="${secaoList}" var="secaovar">
 									<option value="${secaovar.id}">${secaovar.titulo}</option>
 								</c:forEach>
@@ -48,20 +56,19 @@
 						</div>
 						<div class="form-group">
       						<label for="inputTitulo">Titulo</label>
-        					<input class="form-control" id="inputTitulo" name="noticia.titulo" type="text" required="required" value="${noticia.titulo}">
+        					<input class="form-control" id="inputTitulo" name="noticia.titulo" type="text" value="${noticia.titulo}">
     					</div>
 						<div class="form-group">
       						<label for="inputSubtitulo">Subtitulo</label>
-        					<input class="form-control" id="inputSubtitulo" name="noticia.subtitulo" type="text" required="required" value="${noticia.subtitulo}">
+        					<input class="form-control" id="inputSubtitulo" name="noticia.subtitulo" type="text" value="${noticia.subtitulo}">
     					</div>
     					<div class="form-group">
       						<label for="inputData">Data</label>
-      						<span class="erro">${errors.from('noticia.data.invalida')}</span>
-        					<input class="form-control" id="inputData" name="noticia.data" type="text" pattern="^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/([0-9]{4})$" title="Data Inválida" required="required" value=<fmt:formatDate value="${noticia.data}" pattern="dd/MM/yyyy"/> >
+      						<!--<span class="erro">${errors.from('noticia.data.invalida')}</span> -->
+        					<input class="form-control" id="inputData" name="noticia.data" type="text" value=<fmt:formatDate value="${noticia.data}"/> >
         					<script type="text/javascript">
         						jQuery(function($){
        								$("#inputData").mask("99/99/9999");
-       								$("#testeData").mask("99/99/9999");
 								});
         					</script>
     					</div>

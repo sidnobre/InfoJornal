@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
+import br.com.caelum.vraptor.simplevalidator.SimpleValidator;
 import br.ufc.quixada.dao.NoticiaDAO;
 import br.ufc.quixada.dao.SecaoDAO;
 import br.ufc.quixada.dao.UsuarioDAO;
@@ -25,6 +26,7 @@ import br.ufc.quixada.security.JornalistaEditorRule;
 import br.ufc.quixada.security.JornalistaRule;
 import br.ufc.quixada.util.AppConfig;
 import br.ufc.quixada.validator.NoticiaValidador;
+import br.ufc.quixada.validator.NoticiaValidator;
 
 @Controller
 public class NoticiaController {
@@ -34,6 +36,7 @@ public class NoticiaController {
 	@Inject private UsuarioDAO udao;
 	@Inject private Result resultado;
 	@Inject private NoticiaValidador validador;
+	@Inject private SimpleValidator validator;
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaRule.class})
 	public void formulario(){
@@ -81,26 +84,7 @@ public class NoticiaController {
 	
 	@Post
 	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaRule.class})
-	public void adicionar(Noticia noticia, Secao secao,Usuario autor, UploadedFile imagem){
-		File arquivo = new File(AppConfig.HOME+"/uploads/", imagem.getFileName());
-		try {
-			imagem.writeTo(arquivo);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		noticia.setImagem(arquivo.getName());
-		noticia.setSecao(secao);
-		noticia.setAutor(autor);
-		validador.validarFormulario(noticia);
-		ndao.adicionar(noticia);
-		validador.confirmaValidacao();
-		resultado.redirectTo(IndexController.class).index();
-	}
-	
-	@Post
-	@Path("/noticia/atualizar")
-	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
-	public void atualizar(Noticia noticia, Secao secao,Usuario autor, UploadedFile imagem){
+	public void adicionar(Noticia noticia, UploadedFile imagem){
 		if(imagem != null){
 			try {
 				File arquivo = new File(AppConfig.HOME+"/uploads/", imagem.getFileName());
@@ -110,11 +94,34 @@ public class NoticiaController {
 				e.printStackTrace();
 			}
 		}
-		noticia.setSecao(secao);
-		noticia.setAutor(autor);
-		validador.validarFormulario(noticia);
+		//validador.validarFormulario(noticia);
+		validator.validate(noticia, NoticiaValidator.class)
+			.onSuccessAddConfirmation("noticia.sucesso")
+			.onErrorRedirectTo(this).formulario();
+		ndao.adicionar(noticia);
+		//validador.confirmaValidacao();
+		resultado.redirectTo(IndexController.class).index();
+	}
+	
+	@Post
+	@Path("/noticia/atualizar")
+	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
+	public void atualizar(Noticia noticia, UploadedFile imagem){
+		if(imagem != null){
+			try {
+				File arquivo = new File(AppConfig.HOME+"/uploads/", imagem.getFileName());
+				imagem.writeTo(arquivo);
+				noticia.setImagem(arquivo.getName());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//validador.validarFormulario(noticia);
+		validator.validate(noticia, NoticiaValidator.class)
+			.onSuccessAddConfirmation("noticia.sucesso")
+			.onErrorRedirectTo(this).formularioEditar(noticia);
 		ndao.atualizar(noticia);
-		validador.confirmaValidacao();
+		//validador.confirmaValidacao();
 		resultado.redirectTo(IndexController.class).index();
 	}
 	

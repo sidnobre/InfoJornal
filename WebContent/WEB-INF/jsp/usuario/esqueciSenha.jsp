@@ -39,7 +39,7 @@
 					 <span style="color:red;">${errors.from('usuario.email.invalido')}</span>
 					 <div class="input-group">
 					 	<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-					 	<input class="form-control" id="inputEmail" type="email" name="usuario.email" required="required">
+					 	<input class="form-control" id="inputEmail" type="email" name="usuario.email" required="required" autofocus="autofocus">
 					 </div>
 				</div>
 				<button type="submit" class="btn btn-primary btn-lg pull-right">Enviar</button>

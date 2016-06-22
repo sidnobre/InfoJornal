@@ -8,8 +8,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.ufc.quixada.dao.IUsuarioDAO;
 import br.ufc.quixada.dao.PapelDAO;
-import br.ufc.quixada.dao.UsuarioDAO;
+//import br.ufc.quixada.dao.UsuarioDAO;
 import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Usuario;
 import br.ufc.quixada.security.UsuarioSessao;
@@ -18,12 +19,14 @@ import br.ufc.quixada.validator.AutenticacaoValidador;
 @Controller
 public class AutenticacaoController {
 	
-	@Inject private UsuarioDAO udao;
+	@Inject private IUsuarioDAO udao;
 	@Inject private PapelDAO pdao;
 	@Inject private UsuarioSessao usuarioSessao;
 	@Inject private AutenticacaoValidador validador;
 	@Inject private Result resultado;
 
+	public void formulario(){}
+	
 	@Post
 	public void login(Usuario usuario, Long papel){
 		String hash = DigestUtils.sha256Hex(usuario.getSenha());
