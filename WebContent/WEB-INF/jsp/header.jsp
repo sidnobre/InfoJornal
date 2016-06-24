@@ -71,8 +71,7 @@
 					<c:if test="${empty usuarioSessao or not usuarioSessao.autenticado}">
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<!--<a id="modal-577817" href="#modal-container-577817" role="button" class="btn" data-toggle="modal">LogIn</a>-->
-								<a href="<c:url value='/usuario/formularioLogin'/>" role="button" class="btn" data-toggle="modal">LogIn</a>
+								<a href="<c:url value='/autenticacao/formulario'/>" role="button" class="btn" data-toggle="modal">LogIn</a>
 							</li>
 							<li>
 								<a id="btnCadastro" href="<c:url value='/usuario/formularioLeitor'/>" role="button" class="btn">Cadastrar-se</a>

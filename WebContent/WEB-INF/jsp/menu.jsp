@@ -11,7 +11,7 @@
 		</div>
 	</div>
 	
-	<!-- <div class="panel panel-warning">
+	<div class="panel panel-warning">
 		<div class="panel-heading">
 			<h3 class="text-center">TESTES</h3>
 		</div>
@@ -22,6 +22,6 @@
            	<li class="list-group-item"><a href="<c:url value='/usuario/formularioEditor'/>">Adicionar Editor</a></li>
            	<li class="list-group-item"><a href="<c:url value='/classificado/formulario'/>">Adicionar Classificado</a></li>
 		</ul>
-	</div> -->
+	</div>
 	
 </div>

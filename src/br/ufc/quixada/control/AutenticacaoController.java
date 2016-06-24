@@ -8,13 +8,13 @@ import org.apache.commons.codec.digest.DigestUtils;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.simplevalidator.SimpleValidator;
 import br.ufc.quixada.dao.IUsuarioDAO;
 import br.ufc.quixada.dao.PapelDAO;
-//import br.ufc.quixada.dao.UsuarioDAO;
 import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Usuario;
 import br.ufc.quixada.security.UsuarioSessao;
-import br.ufc.quixada.validator.AutenticacaoValidador;
+import br.ufc.quixada.validator.AutenticacaoValidator;
 
 @Controller
 public class AutenticacaoController {
@@ -22,7 +22,7 @@ public class AutenticacaoController {
 	@Inject private IUsuarioDAO udao;
 	@Inject private PapelDAO pdao;
 	@Inject private UsuarioSessao usuarioSessao;
-	@Inject private AutenticacaoValidador validador;
+	@Inject private SimpleValidator validator;
 	@Inject private Result resultado;
 
 	public void formulario(){}
@@ -33,17 +33,15 @@ public class AutenticacaoController {
 		usuario.setSenha(hash);
 		Usuario usuarioCarregado = udao.buscarPorLoginSenha(usuario);
 		Papel papelCarregado = pdao.buscar(papel);
-		validador.validarAutenticacao(usuarioCarregado,papelCarregado);
-		
-		usuarioSessao.autenticar(usuarioCarregado, papelCarregado);
-		validador.confirmarLogin();
-		
+		usuarioSessao.criar(usuarioCarregado, papelCarregado);
+		validator.validate(usuarioSessao, AutenticacaoValidator.class)
+			.onSuccessAddConfirmation("usuario.login.sucesso")
+			.onErrorRedirectTo(this).formulario();
 		resultado.redirectTo(IndexController.class).index();
 	}
 	
 	public void logout(){
-		usuarioSessao.desautenticar();
-		validador.confirmarLogout();
-		resultado.redirectTo(IndexController.class).index();
+		usuarioSessao.destruir();
+		resultado.redirectTo(this).formulario();
 	}
 }

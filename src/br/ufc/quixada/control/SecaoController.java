@@ -7,17 +7,18 @@ import javax.inject.Inject;
 import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.simplevalidator.SimpleValidator;
 import br.ufc.quixada.dao.SecaoDAO;
 import br.ufc.quixada.model.Secao;
 import br.ufc.quixada.security.AutenticacaoRule;
 import br.ufc.quixada.security.EditorRule;
-import br.ufc.quixada.validator.SecaoValidador;
+import br.ufc.quixada.validator.SecaoValidator;
 
 @Controller
 public class SecaoController {
 	
 	@Inject private SecaoDAO dao;
-	@Inject private SecaoValidador validador;
+	@Inject private SimpleValidator validator;
 	@Inject private Result result;
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, EditorRule.class})
@@ -26,9 +27,11 @@ public class SecaoController {
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, EditorRule.class})
 	public void adicionar(Secao secao){
-		validador.validarFormulario(secao);
+		
+		validator.validate(secao, SecaoValidator.class)
+			.onSuccessAddConfirmation("secao.adicionada.sucesso")
+			.onErrorRedirectTo(this).formulario();
 		dao.adicionar(secao);
-		validador.confirmarValidacao();
 		result.redirectTo(IndexController.class).index();
 	}
 	

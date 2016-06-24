@@ -16,12 +16,12 @@ public class UsuarioSessao implements Serializable{
 	private Usuario usuario;
 	private Papel papel;
 	
-	public void autenticar(Usuario usuario, Papel papel){
+	public void criar(Usuario usuario, Papel papel){
 		this.usuario = usuario;
 		this.papel = papel;
 	}
 	
-	public void desautenticar(){
+	public void destruir(){
 		this.usuario = null;
 		this.papel = null;
 		

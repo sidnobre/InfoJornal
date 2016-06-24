@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Esqueci a Senha</title>
+	<title>InfoJornal</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<meta name="description" content="">
@@ -29,7 +29,14 @@
                 	<div class="panel-title"><h3>Realizar Login</h3></div>
                     	<div style="float:right; font-size: 90%; position: relative; top:-10px"><a href="<c:url value='/usuario/esqueciSenha'/>">Esqueceu sua senha?</a></div>
 					</div>
-
+					<c:if test="${not empty errors}">
+						<div class="alert alert-dismissible alert-danger">
+  							<button type="button" class="close" data-dismiss="alert">×</button>
+        					<c:forEach var="error" items="${errors}">
+            					<p class="text-center"><span class="glyphicon glyphicon-exclamation-sign"></span><strong> ${error.message}</strong></p>
+        					</c:forEach>
+    					</div>
+					</c:if>
 					<div style="padding-top:30px" class="panel-body" >
 
 						<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>

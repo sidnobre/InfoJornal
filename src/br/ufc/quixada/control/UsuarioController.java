@@ -34,8 +34,6 @@ public class UsuarioController {
 	@Inject private SimpleValidator validator;
 	@Inject private EmailSender mailer;
 	
-	public void formularioLogin(){}
-	
 	@NoPageCache
 	public void formularioLeitor(){}
 	
