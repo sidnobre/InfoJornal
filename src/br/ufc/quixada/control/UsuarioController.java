@@ -11,6 +11,7 @@ import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.simplevalidator.SimpleValidator;
 import br.ufc.quixada.annotation.NoPageCache;
 import br.ufc.quixada.dao.PapelDAO;
 import br.ufc.quixada.dao.UsuarioDAO;
@@ -21,6 +22,7 @@ import br.ufc.quixada.security.EditorRule;
 import br.ufc.quixada.util.EmailSender;
 import br.ufc.quixada.util.GeradorDeSenha;
 import br.ufc.quixada.validator.UsuarioValidador;
+import br.ufc.quixada.validator.UsuarioValidator;
 
 @Controller
 public class UsuarioController {
@@ -29,6 +31,7 @@ public class UsuarioController {
 	@Inject private PapelDAO pdao;
 	@Inject private Result resultado;
 	@Inject private UsuarioValidador usuarioValidador;
+	@Inject private SimpleValidator validator;
 	@Inject private EmailSender mailer;
 	
 	public void formularioLogin(){}
@@ -48,14 +51,15 @@ public class UsuarioController {
 	@Post
 	@NoPageCache
 	public void adicionarLeitor(Usuario usuario){
-		usuarioValidador.validarFormulario(usuario);
+		validator.validate(usuario, UsuarioValidator.class)
+			.onSuccessAddConfirmation("usuario.adicionado.sucesso")
+			.onErrorRedirectTo(this).formularioLeitor();
 		String hash = DigestUtils.sha256Hex(usuario.getSenha());
 		usuario.setSenha(hash);
 		List<Papel> papeis = new ArrayList<Papel>();
 		papeis.add(pdao.buscar(Papel.LEITOR_ID));
 		usuario.setPapeis(papeis);
 		udao.adicionar(usuario);
-		usuarioValidador.confirmar();
 		resultado.redirectTo(IndexController.class).index();
 	}
 	
@@ -63,7 +67,9 @@ public class UsuarioController {
 	@NoPageCache
 	@CustomBrutauthRules({AutenticacaoRule.class, EditorRule.class})
 	public void adicionarJornalista(Usuario usuario){
-		usuarioValidador.validarFormulario(usuario);
+		validator.validate(usuario, UsuarioValidator.class)
+			.onSuccessAddConfirmation("usuario.adicionado.sucesso")
+			.onErrorRedirectTo(this).formularioJornalista();
 		String hash = DigestUtils.sha256Hex(usuario.getSenha());
 		usuario.setSenha(hash);
 		List<Papel> papeis = new ArrayList<Papel>();
@@ -71,26 +77,22 @@ public class UsuarioController {
 		papeis.add(pdao.buscar(Papel.JORNALISTA_ID));
 		usuario.setPapeis(papeis);
 		udao.adicionar(usuario);
-		usuarioValidador.confirmar();
 		resultado.redirectTo(IndexController.class).index();
 	}
 	
-	@Post
+	/*@Post
 	@NoPageCache
 	@CustomBrutauthRules({AutenticacaoRule.class, EditorRule.class})
 	public void adicionarEditor(Usuario usuario){
-		usuarioValidador.validarFormulario(usuario);
-		String hash = DigestUtils.sha256Hex(usuario.getSenha());
-		usuario.setSenha(hash);
+		prepare(usuario);
 		List<Papel> papeis = new ArrayList<Papel>();
 		papeis.add(pdao.buscar(Papel.LEITOR_ID));
 		papeis.add(pdao.buscar(Papel.JORNALISTA_ID));
 		papeis.add(pdao.buscar(Papel.EDITOR_ID));
 		usuario.setPapeis(papeis);
 		udao.adicionar(usuario);
-		usuarioValidador.confirmar();
 		resultado.redirectTo(IndexController.class).index();
-	}
+	}*/
 	
 	public void atualizarLeitor(){}
 	

@@ -37,7 +37,7 @@
 				<div class="alert alert-dismissible alert-danger">
   					<button type="button" class="close" data-dismiss="alert">×</button>
         			<c:forEach var="error" items="${errors}">
-            			<p class="text-center "><strong>${error.message}</strong></p>
+            			<p class="text-center "><span class="glyphicon glyphicon-exclamation-sign"></span><strong> ${error.message}</strong></p>
         			</c:forEach>
     			</div>
 			</c:if>

@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
+
+<c:if test="${not empty confirmations}">
+	<div class="alert alert-dismissible alert-success">
+  		<button type="button" class="close" data-dismiss="alert">×</button>
+        <c:forEach var="confirmation" items="${confirmations}">
+        	<p class="text-center"><span class="glyphicon glyphicon-ok"></span><strong> ${confirmation.message}</strong></p>
+        </c:forEach>
+    </div>
+</c:if>
+
+
+
 <c:if test="${not empty vmessages.success}">
 	<div class="alert alert-dismissible alert-success">
   		<button type="button" class="close" data-dismiss="alert">×</button>

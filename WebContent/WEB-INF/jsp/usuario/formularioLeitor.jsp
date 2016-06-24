@@ -33,10 +33,17 @@
 					</h1>
 				</div>
 			</div>
+			<c:if test="${not empty errors}">
+				<div class="alert alert-dismissible alert-danger">
+  					<button type="button" class="close" data-dismiss="alert">×</button>
+        			<c:forEach var="error" items="${errors}">
+            			<p class="text-center"><span class="glyphicon glyphicon-exclamation-sign"></span><strong> ${error.message}</strong></p>
+        			</c:forEach>
+    			</div>
+			</c:if>
 			<form action="<c:url value='/usuario/adicionarLeitor'/>" role="form" method="POST">
 				<div class="form-group">
 					 <label for="inputNome">Nome completo</label>
-					 <span style="color:red;">${errors.from('usuario.nome.invalido')}</span>
 					 <div class="input-group">
 					 	<span class="input-group-addon"><span class="glyphicon glyphicon-font"></span></span>
 					 	<input class="form-control" id="inputNome" type="text" name="usuario.nome" required="required" autofocus="autofocus">
@@ -44,7 +51,6 @@
 				</div>
 				<div class="form-group">
 					 <label for="inputEmail">E-mail</label>
-					 <span style="color:red;">${errors.from('usuario.email.invalido')}</span>
 					 <div class="input-group">
 					 	<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
 					 	<input class="form-control" id="inputEmail" type="email" name="usuario.email" required="required">
@@ -52,18 +58,17 @@
 				</div>
 				<div class="form-group">
 					 <label for="inputLogin">LogIn</label>
-					 <span style="color:red;">${errors.from('usuario.login.invalido')}</span>
+					 <p id="msgExisteLogin"></p>
 					 <div class="input-group">
 					 	<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-					 	<input class="form-control" id="inputLogin" type="text" name="usuario.login" required="required">
-					 	<span class="input-group-btn">
+					 	<input class="form-control" id="inputLogin" type="text" name="usuario.login">
+					 	<!--<span class="input-group-btn">
 					 		<button class="btn btn-default" type="button">Verificar</button>
-					 	</span>
+					 	</span>-->
 					 </div>
 				</div>
 				<div class="form-group">
 					 <label for="inputSenha">Senha</label>
-					 <span style="color:red;">${errors.from('usuario.senha.invalida')}</span>
 					 <div class="input-group">
 					 	<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 					 	<input class="form-control" id="inputSenha" type="password" name="usuario.senha" required="required">

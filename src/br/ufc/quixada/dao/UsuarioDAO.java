@@ -24,6 +24,18 @@ public class UsuarioDAO implements IUsuarioDAO{
 		return manager.find(Usuario.class, id);
 	}
 	
+	public boolean existeLogin(Usuario usuario){
+		if(buscarPorLogin(usuario) != null)
+			return true;
+		return false;
+	}
+	
+	public boolean existeEmail(Usuario usuario){
+		if(buscarPorEmail(usuario) != null)
+			return true;
+		return false;
+	}
+	
 	public Usuario buscarPorLogin(Usuario usuario){
 		TypedQuery<Usuario> query = manager.createNamedQuery("Usuario.porLogin", Usuario.class);
 		query.setParameter("login", usuario.getLogin());

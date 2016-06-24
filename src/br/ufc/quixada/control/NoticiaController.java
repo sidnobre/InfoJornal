@@ -57,21 +57,18 @@ public class NoticiaController {
 	}
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
-	@Path("/noticia/buscar/por-data")
 	public void buscarPorData(Date dataInicio, Date dataFinal){
 		List<Noticia> noticiaList = ndao.buscarPorData(dataInicio, dataFinal);
 		resultado.redirectTo(this).resultadoBusca(noticiaList);
 	}
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
-	@Path("/noticia/buscar/por-titulo")
 	public void buscarPorTitulo(Noticia noticia){
 		List<Noticia> noticiaList = ndao.buscarPorTitulo(noticia);
 		resultado.redirectTo(this).resultadoBusca(noticiaList);
 	}
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
-	@Path("/noticia/buscar/por-autor")
 	public void buscarPorAutor(Noticia noticia){
 		List<Noticia> noticiaList = ndao.buscarPorAutor(noticia);
 		resultado.redirectTo(this).resultadoBusca(noticiaList);
@@ -94,12 +91,10 @@ public class NoticiaController {
 				e.printStackTrace();
 			}
 		}
-		//validador.validarFormulario(noticia);
 		validator.validate(noticia, NoticiaValidator.class)
-			.onSuccessAddConfirmation("noticia.sucesso")
+			.onSuccessAddConfirmation("noticia.adicionada.sucesso")
 			.onErrorRedirectTo(this).formulario();
 		ndao.adicionar(noticia);
-		//validador.confirmaValidacao();
 		resultado.redirectTo(IndexController.class).index();
 	}
 	
@@ -116,12 +111,10 @@ public class NoticiaController {
 				e.printStackTrace();
 			}
 		}
-		//validador.validarFormulario(noticia);
 		validator.validate(noticia, NoticiaValidator.class)
-			.onSuccessAddConfirmation("noticia.sucesso")
+			.onSuccessAddConfirmation("noticia.atualizada.sucesso")
 			.onErrorRedirectTo(this).formularioEditar(noticia);
 		ndao.atualizar(noticia);
-		//validador.confirmaValidacao();
 		resultado.redirectTo(IndexController.class).index();
 	}
 	

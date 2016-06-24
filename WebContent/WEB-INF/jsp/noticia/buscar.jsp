@@ -41,7 +41,7 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="por-data-tab">
-						<form action="<c:url value='/noticia/buscar/por-data'/>" role="form" method="POST">
+						<form action="<c:url value='/noticia/buscarPorData'/>" role="form" method="POST">
 							<div class="form-group">
       						<label for="inputDataInicio">Data do Início</label>
       						<span class="erro">${errors.from('noticia.data.invalida')}</span>
@@ -71,7 +71,7 @@
     					</form>
 					</div>
 						<div class="tab-pane " id="por-titulo-tab">
-							<form action="<c:url value='/noticia/buscar/por-titulo'/>" role="form" method="POST">
+							<form action="<c:url value='/noticia/buscarPorTitulo'/>" role="form" method="POST">
 									<div class="form-group">
 										<label for="inputTitulo">Titulo</label> <span
 											style="color: red;">${errors.from('noticia.titulo.invalido')}</span>
@@ -85,7 +85,7 @@
 							</form>
 						</div>
 						<div class="tab-pane " id="por-autor-tab">
-							<form action="<c:url value='/noticia/buscar/por-autor'/>" role="form" method="POST">
+							<form action="<c:url value='/noticia/buscarPorAutor'/>" role="form" method="POST">
 								<div class="form-group">
 									<label for="jornalistaSelect">Autor</label><br>
 									<select name="noticia.autor.id" id="jornalistaSelect" class="selectpicker" data-style="btn-primary">
