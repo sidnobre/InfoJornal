@@ -8,6 +8,7 @@ public class Oferta {
 	private Double valor;
 	private Date data;
 	private Usuario autor;
+	private Double ultimaOferta;
 	
 	public Double getValor() {
 		return valor;
@@ -26,5 +27,11 @@ public class Oferta {
 	}
 	public void setAutor(Usuario autor) {
 		this.autor = autor;
+	}
+	public Double getUltimaOferta(){
+		return ultimaOferta;
+	}
+	public void setUltimaOferta(Double ultimaOferta){
+		this.ultimaOferta = ultimaOferta;
 	}
 }

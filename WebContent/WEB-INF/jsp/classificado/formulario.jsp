@@ -27,6 +27,14 @@
 			<h3 class="text-center text-primary">
 				Cadastro de Classificado
 			</h3>
+			<c:if test="${not empty errors}">
+				<div class="alert alert-dismissible alert-danger">
+  					<button type="button" class="close" data-dismiss="alert">×</button>
+        			<c:forEach var="error" items="${errors}">
+            			<p class="text-center "><span class="glyphicon glyphicon-exclamation-sign"></span><strong> ${error.message}</strong></p>
+        			</c:forEach>
+    			</div>
+			</c:if>
 			<form action="<c:url value='/classificado/adicionar'/>" class="row clearfix" role="form" method="POST">
 				<div class="col-md-2 column"></div>
 				<div class="col-md-8 column">

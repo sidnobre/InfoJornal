@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +29,23 @@
 					<li><a href="<c:url value='/' />">Início</a> <span class="divider">/</span></li>
 					<li class="active">Lista de Classificados</li>
 				</ul>
-				<c:import url="alerts.jsp"></c:import>
+				<!--<c:import url="alerts.jsp"></c:import>-->
+				<c:if test="${not empty errors}">
+					<div class="alert alert-dismissible alert-danger">
+  						<button type="button" class="close" data-dismiss="alert">×</button>
+        				<c:forEach var="error" items="${errors}">
+            				<p class="text-center "><span class="glyphicon glyphicon-exclamation-sign"></span><strong> ${error.message}</strong></p>
+        				</c:forEach>
+    				</div>
+				</c:if>
+				<c:if test="${not empty confirmations}">
+					<div class="alert alert-dismissible alert-success">
+  						<button type="button" class="close" data-dismiss="alert">×</button>
+        				<c:forEach var="confirmation" items="${confirmations}">
+        					<p class="text-center"><span class="glyphicon glyphicon-ok"></span><strong> ${confirmation.message}</strong></p>
+        				</c:forEach>
+    				</div>
+				</c:if>
 				<c:forEach items="${classificadoList}" var="classificado">
 				<div class="panel-group" id="panel-group-${classificado.id}">
 					<div class="panel panel-default">
@@ -66,10 +82,10 @@
 										</div>
 									</div>
 									<div class="col-md-3 column">
-										<c:if test="${usuarioAutenticado.papel.nivel==1000}">
+										<c:if test="${usuarioSessao.papel.nivel==1000}">
 										<form action="<c:url value='/classificado/ofertar' />" role="form" method="POST">
 											<input type="hidden" name="classificado.id" value="${classificado.id}"/>
-											<input type="hidden" name="autor.id" value="${usuarioAutenticado.usuario.id}"/>
+											<input type="hidden" name="oferta.autor.id" value="${usuarioSessao.usuario.id}"/>
 											<div class="form-group">
 												<label for="inputOferta">Valor da Oferta</label>
 												<c:if test="${classificado.valorOferta<=0}">
@@ -82,7 +98,7 @@
 											<button type="submit" class="btn btn-primary pull-right">Ofertar</button>
 										</form>
 										</c:if>
-										<c:if test="${empty usuarioAutenticado or usuarioAutenticado.papel.nivel!=1000}">
+										<c:if test="${empty usuarioSessao or usuarioSessao.papel.nivel!=1000}">
 											<div class="alert alert-info">
 												<p>Somente leitores autenticados podem realizar ofertas.</p>
 											</div>

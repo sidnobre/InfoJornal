@@ -12,6 +12,7 @@
 	
 	<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
 	<link href="<c:url value='/css/estilo.css'/>" rel="stylesheet">
+	<link href="<c:url value='/css/comment.css'/>" rel="stylesheet">
 
 	<!-- <link rel="shortcut icon" href="<c:url value='/img/quixada.png'/>"> -->
 
@@ -92,11 +93,48 @@
 			</div>
 			
 			<div class="row clearfix">
-				<div class="col-md-2 column"></div>
-				<div class="col-md-8 column">
-					<h2>Comentários</h2>			
-					
-				<div class="col-md-2 column"></div>
+				<div class="col-md-1 column"></div>
+				<div class="col-md-10 column">
+					<h2>Comentários</h2>
+						<form action="<c:url value='/comentario/adicionar'></c:url>" method="post">
+							<div class="input-group"> 
+                    			<input class="form-control" placeholder="Deixe um comentário" type="text">
+                    			<span class="input-group-btn"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Comentar</button></span>
+                			</div>
+                		</form>
+                		<ul class="comments-list">
+                    		<li class="comment">
+                            	<img class="avatar pull-left" src="<c:url value='/img/user-placeholder.png'></c:url>" alt="avatar">
+                        		<div class="comment-body">
+                            		<div class="comment-heading">
+                                		<h4 class="user">Gavino Free</h4>
+                                		<h5 class="time">5 minutes ago</h5>
+                            		</div>
+                            		<p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                        		</div>
+                    		</li>
+                    		<li class="comment">
+                            	<img class="avatar pull-left" src="<c:url value='/img/user-placeholder.png'></c:url>" alt="avatar">
+                        		<div class="comment-body">
+                            		<div class="comment-heading">
+                                		<h4 class="user">Gavino Free</h4>
+                                		<h5 class="time">5 minutes ago</h5>
+                            		</div>
+                            		<p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                        		</div>
+                    		</li>
+                    		<li class="comment">
+                            	<img class="avatar pull-left" src="<c:url value='/img/user-placeholder.png'></c:url>" alt="avatar">
+                        		<div class="comment-body">
+                            		<div class="comment-heading">
+                                		<h4 class="user">Gavino Free</h4>
+                                		<h5 class="time">5 minutes ago</h5>
+                            		</div>
+                            		<p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                        		</div>
+                    		</li>
+                		</ul>
+					<div class="col-md-1 column"></div>
 			</div>
 		</div>
 	</div>

@@ -22,7 +22,8 @@ public class Classificado {
 	private Long id;
 	@Column(nullable=false)
 	private String titulo;
-	@Column(nullable=false)
+	@Column(columnDefinition="TEXT", nullable=false)
+	//@Column(nullable=false)
 	private String texto;
 	@Column(nullable=false)
 	private Double preco;

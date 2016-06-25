@@ -8,22 +8,23 @@ import javax.inject.Inject;
 import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.simplevalidator.SimpleValidator;
 import br.ufc.quixada.dao.ClassificadoDAO;
 import br.ufc.quixada.dao.SecaoDAO;
 import br.ufc.quixada.model.Classificado;
-import br.ufc.quixada.model.Usuario;
 import br.ufc.quixada.security.AutenticacaoRule;
 import br.ufc.quixada.security.EditorRule;
 import br.ufc.quixada.security.LeitorRule;
 import br.ufc.quixada.util.Oferta;
-import br.ufc.quixada.validator.ClassificadoValidador;
+import br.ufc.quixada.validator.ClassificadoValidator;
+import br.ufc.quixada.validator.OfertaValidator;
 
 @Controller
 public class ClassificadoController {
 	
 	@Inject private ClassificadoDAO cdao;
 	@Inject private SecaoDAO sdao;
-	@Inject private ClassificadoValidador validador;
+	@Inject private SimpleValidator validator;
 	@Inject private Result resultado;
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, EditorRule.class})
@@ -31,12 +32,13 @@ public class ClassificadoController {
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, EditorRule.class})
 	public void adicionar(Classificado classificado){
-		validador.validarFormulario(classificado);
 		classificado.setDataOferta(null);
 		classificado.setAutorOferta(null);
 		classificado.setValorOferta(0.0);
+		validator.validate(classificado, ClassificadoValidator.class)
+			.onSuccessAddConfirmation("classificado.adicionado.sucesso")
+			.onErrorRedirectTo(this).formulario();
 		cdao.adicionar(classificado);
-		validador.confirmarValidacao();
 		resultado.redirectTo(ClassificadoController.class).listar();
 	}
 	
@@ -46,16 +48,20 @@ public class ClassificadoController {
 	};
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, LeitorRule.class})
-	public void ofertar(Classificado classificado, Oferta oferta, Usuario autor){
+	public void ofertar(Classificado classificado, Oferta oferta){
 		classificado = cdao.buscar(classificado.getId());
-		oferta.setAutor(autor);
 		oferta.setData(new Date());
-		validador.validarFormularioOferta(classificado, oferta);
+		oferta.setUltimaOferta(classificado.getValorOferta());
+		
+		validator.validate(oferta, OfertaValidator.class)
+			.onSuccessAddConfirmation("oferta.adicionada.sucesso")
+			.onErrorRedirectTo(this).listar();
+		
 		classificado.setAutorOferta(oferta.getAutor());
 		classificado.setDataOferta(oferta.getData());
 		classificado.setValorOferta(oferta.getValor());
 		cdao.atualizar(classificado);
-		validador.confirmarOferta();
+		
 		resultado.redirectTo(ClassificadoController.class).listar();
 	}
 }
