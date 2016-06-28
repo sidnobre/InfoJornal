@@ -15,9 +15,9 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.simplevalidator.SimpleValidator;
-import br.ufc.quixada.dao.NoticiaDAO;
-import br.ufc.quixada.dao.SecaoDAO;
-import br.ufc.quixada.dao.UsuarioDAO;
+import br.ufc.quixada.dao.NoticiaDao;
+import br.ufc.quixada.dao.SecaoDao;
+import br.ufc.quixada.dao.UsuarioDao;
 import br.ufc.quixada.model.Noticia;
 import br.ufc.quixada.model.Secao;
 import br.ufc.quixada.model.Usuario;
@@ -25,17 +25,15 @@ import br.ufc.quixada.security.AutenticacaoRule;
 import br.ufc.quixada.security.JornalistaEditorRule;
 import br.ufc.quixada.security.JornalistaRule;
 import br.ufc.quixada.util.AppConfig;
-import br.ufc.quixada.validator.NoticiaValidador;
 import br.ufc.quixada.validator.NoticiaValidator;
 
 @Controller
 public class NoticiaController {
 	
-	@Inject private SecaoDAO sdao;
-	@Inject private NoticiaDAO ndao;
-	@Inject private UsuarioDAO udao;
+	@Inject private SecaoDao sdao;
+	@Inject private NoticiaDao ndao;
+	@Inject private UsuarioDao udao;
 	@Inject private Result resultado;
-	@Inject private NoticiaValidador validador;
 	@Inject private SimpleValidator validator;
 	
 	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaRule.class})
@@ -84,7 +82,7 @@ public class NoticiaController {
 	public void adicionar(Noticia noticia, UploadedFile imagem){
 		if(imagem != null){
 			try {
-				File arquivo = new File(AppConfig.HOME+"/uploads/", imagem.getFileName());
+				File arquivo = new File(AppConfig.HOME+"/app-root/data/uploads/", imagem.getFileName());
 				imagem.writeTo(arquivo);
 				noticia.setImagem(arquivo.getName());
 			} catch (IOException e) {
@@ -104,7 +102,7 @@ public class NoticiaController {
 	public void atualizar(Noticia noticia, UploadedFile imagem){
 		if(imagem != null){
 			try {
-				File arquivo = new File(AppConfig.HOME+"/uploads/", imagem.getFileName());
+				File arquivo = new File(AppConfig.HOME+"/app-root/data/uploads/", imagem.getFileName());
 				imagem.writeTo(arquivo);
 				noticia.setImagem(arquivo.getName());
 			} catch (IOException e) {
@@ -123,7 +121,7 @@ public class NoticiaController {
 	@CustomBrutauthRules({AutenticacaoRule.class, JornalistaEditorRule.class})
 	public void remover(Noticia noticia){
 		ndao.remover(ndao.buscar(noticia));
-		validador.confirmaRemocao();
+		resultado.include("noticia.removida.sucesso", "A noticia foi removida com sucesso!");
 		resultado.redirectTo(IndexController.class).index();
 	}
 	
@@ -147,6 +145,6 @@ public class NoticiaController {
 	@Get
 	@Path("/noticia/imagem/{noticia.imagem}")
 	public File imagemDownloader(Noticia noticia){
-		return new File(AppConfig.HOME+"/uploads/", noticia.getImagem());
+		return new File(AppConfig.HOME+"/app-root/data/uploads/", noticia.getImagem());
 	}
 }

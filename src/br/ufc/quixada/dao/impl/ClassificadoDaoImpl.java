@@ -1,4 +1,4 @@
-package br.ufc.quixada.dao;
+package br.ufc.quixada.dao.impl;
 
 import java.util.List;
 
@@ -7,10 +7,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.ufc.quixada.dao.ClassificadoDao;
 import br.ufc.quixada.model.Classificado;
 
 @RequestScoped
-public class ClassificadoDAO implements IClassificadoDAO{
+public class ClassificadoDaoImpl implements ClassificadoDao{
 	
 	@Inject private EntityManager manager;
 

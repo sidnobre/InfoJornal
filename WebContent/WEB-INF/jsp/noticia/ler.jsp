@@ -120,7 +120,7 @@
                         			<div class="comment-body">
                             			<div class="comment-heading">
                                 			<h4 class="user">${comentario.autor.nome}</h4>
-                                			<h5 class="time">${comentario.data}</h5>
+                                			<h5 class="time"><fmt:formatDate value="${comentario.data}" pattern="dd/MM/yyyy"/></h5>
                             			</div>
                             			<p>${comentario.texto}</p>
                             			<c:if test="${usuarioSessao.usuario.id == comentario.autor.id}">

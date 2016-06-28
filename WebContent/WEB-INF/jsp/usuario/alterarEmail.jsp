@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Esqueci a Senha</title>
+	<title>Formulário</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<meta name="description" content="">
@@ -29,7 +29,7 @@
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<h1 class="text-center text-primary">
-						Solicitar nova senha
+						Alterar o e-mail de usuário
 					</h1>
 				</div>
 			</div>
@@ -41,12 +41,20 @@
         			</c:forEach>
     			</div>
 			</c:if>
-			<form action="<c:url value='/usuario/resetarSenha'/>" role="form" method="POST">
+			<form action="<c:url value='/usuario/atualizarEmail'/>" role="form" method="POST">
 				<div class="form-group">
-					 <label for="inputEmail">E-mail</label>
+					<input type="hidden" name="usuario.id" value="${usuarioSessao.usuario.id}">
+					 <label for="inputSenhaAtual">Confirme a senha atual</label>
+					 <div class="input-group">
+					 	<span class="input-group-addon"><span class="glyphicon glyphicon-check"></span></span>
+					 	<input class="form-control" id="inputSenhaAtual" type="password" name="usuarioAtual.senha" required="required">
+					 </div>
+				</div>
+				<div class="form-group">
+					 <label for="inputSenhaNova">Novo e-mail</label>
 					 <div class="input-group">
 					 	<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-					 	<input class="form-control" id="inputEmail" type="email" name="usuario.email" required="required" autofocus="autofocus">
+					 	<input class="form-control" id="inputSenhaNova" type="email" name="novoEmail" required="required">
 					 </div>
 				</div>
 				<button type="submit" class="btn btn-primary btn-lg pull-right">Enviar</button>

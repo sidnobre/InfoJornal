@@ -13,24 +13,24 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.simplevalidator.SimpleValidator;
 import br.ufc.quixada.annotation.NoPageCache;
-import br.ufc.quixada.dao.PapelDAO;
-import br.ufc.quixada.dao.UsuarioDAO;
+import br.ufc.quixada.dao.PapelDao;
+import br.ufc.quixada.dao.UsuarioDao;
 import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Usuario;
 import br.ufc.quixada.security.AutenticacaoRule;
 import br.ufc.quixada.security.EditorRule;
 import br.ufc.quixada.util.EmailSender;
 import br.ufc.quixada.util.GeradorDeSenha;
-import br.ufc.quixada.validator.UsuarioValidador;
+import br.ufc.quixada.validator.EmailValidator;
+import br.ufc.quixada.validator.SenhaValidator;
 import br.ufc.quixada.validator.UsuarioValidator;
 
 @Controller
 public class UsuarioController {
 	
-	@Inject private UsuarioDAO udao;
-	@Inject private PapelDAO pdao;
+	@Inject private UsuarioDao udao;
+	@Inject private PapelDao pdao;
 	@Inject private Result resultado;
-	@Inject private UsuarioValidador usuarioValidador;
 	@Inject private SimpleValidator validator;
 	@Inject private EmailSender mailer;
 	
@@ -45,6 +45,14 @@ public class UsuarioController {
 	public void perfil(){}
 	
 	public void esqueciSenha(){}
+	
+	
+	@CustomBrutauthRules(AutenticacaoRule.class)
+	public void alterarSenha(){}
+	
+	
+	@CustomBrutauthRules(AutenticacaoRule.class)
+	public void alterarEmail(){}
 	
 	@Post
 	@NoPageCache
@@ -92,19 +100,40 @@ public class UsuarioController {
 		resultado.redirectTo(IndexController.class).index();
 	}*/
 	
-	public void atualizarLeitor(){}
+	@Post
+	@CustomBrutauthRules(AutenticacaoRule.class)
+	public void atualizarSenha(Usuario usuario, Usuario usuarioAtual, String novaSenha){
+		usuario = udao.buscar(usuario.getId());
+		validator.validate(usuarioAtual, SenhaValidator.class)
+			.onSuccessAddConfirmation("usuario.senha.atualizada.sucesso")
+			.onErrorRedirectTo(this).alterarSenha();
+		usuario.setSenha(DigestUtils.sha256Hex(novaSenha));
+		udao.atualizar(usuario);
+		resultado.redirectTo(this).perfil();
+	}
 	
-	public void atualizarJornalista(){}
+	@Post
+	@CustomBrutauthRules(AutenticacaoRule.class)
+	public void atualizarEmail(Usuario usuario, Usuario usuarioAtual, String novoEmail){
+		usuario = udao.buscar(usuario.getId());
+		validator.validate(usuarioAtual, SenhaValidator.class)
+			.onSuccessAddConfirmation("usuario.email.atualizado.sucesso")
+			.onErrorRedirectTo(this).alterarEmail();
+		usuario.setEmail(novoEmail);
+		udao.atualizar(usuario);
+		resultado.redirectTo(this).perfil();
+	}
 	
 	public void resetarSenha(Usuario usuario){
+		validator.validate(usuario, EmailValidator.class)
+			.onSuccessAddConfirmation("usuario.senha.redefinida")
+			.onErrorRedirectTo(this).esqueciSenha();
 		Usuario usuarioCarregado = udao.buscarPorEmail(usuario);
-		usuarioValidador.validarConta(usuarioCarregado);
 		String novaSenha = GeradorDeSenha.gerarSenha();
-		String hash = DigestUtils.sha256Hex(novaSenha);
-		usuarioCarregado.setSenha(hash);
+		String novoHash = DigestUtils.sha256Hex(novaSenha);
+		usuarioCarregado.setSenha(novoHash);
 		udao.atualizar(usuarioCarregado);
 		mailer.enviar(usuarioCarregado.getEmail(), usuarioCarregado.getLogin(), novaSenha);
-		usuarioValidador.confirmarReset();
 		resultado.redirectTo(IndexController.class).index();
 	}
 }

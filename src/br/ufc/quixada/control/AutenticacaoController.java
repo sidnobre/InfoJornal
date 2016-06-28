@@ -9,8 +9,8 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.simplevalidator.SimpleValidator;
-import br.ufc.quixada.dao.IUsuarioDAO;
-import br.ufc.quixada.dao.PapelDAO;
+import br.ufc.quixada.dao.PapelDao;
+import br.ufc.quixada.dao.UsuarioDao;
 import br.ufc.quixada.model.Papel;
 import br.ufc.quixada.model.Usuario;
 import br.ufc.quixada.security.UsuarioSessao;
@@ -19,8 +19,8 @@ import br.ufc.quixada.validator.AutenticacaoValidator;
 @Controller
 public class AutenticacaoController {
 	
-	@Inject private IUsuarioDAO udao;
-	@Inject private PapelDAO pdao;
+	@Inject private UsuarioDao udao;
+	@Inject private PapelDao pdao;
 	@Inject private UsuarioSessao usuarioSessao;
 	@Inject private SimpleValidator validator;
 	@Inject private Result resultado;

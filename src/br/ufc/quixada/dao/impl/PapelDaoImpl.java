@@ -1,4 +1,4 @@
-package br.ufc.quixada.dao;
+package br.ufc.quixada.dao.impl;
 
 import java.util.List;
 
@@ -7,10 +7,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.ufc.quixada.dao.PapelDao;
 import br.ufc.quixada.model.Papel;
 
 @RequestScoped
-public class PapelDAO implements IPapelDAO{
+public class PapelDaoImpl implements PapelDao{
 
 	@Inject private EntityManager manager;
 	

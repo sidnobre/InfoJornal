@@ -1,4 +1,4 @@
-package br.ufc.quixada.dao;
+package br.ufc.quixada.dao.impl;
 
 import java.util.List;
 
@@ -7,10 +7,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.ufc.quixada.dao.SecaoDao;
 import br.ufc.quixada.model.Secao;
 
 @RequestScoped
-public class SecaoDAO implements ISecaoDAO{
+public class SecaoDaoImpl implements SecaoDao{
 	
 	@Inject private EntityManager manager;
 

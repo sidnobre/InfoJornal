@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import br.com.caelum.vraptor.simplevalidator.CustomValidationStrategy;
 import br.com.caelum.vraptor.simplevalidator.ValidationStrategyHelper;
-import br.ufc.quixada.dao.UsuarioDAO;
+import br.ufc.quixada.dao.UsuarioDao;
 import br.ufc.quixada.model.Usuario;
 
 @RequestScoped
@@ -15,7 +15,7 @@ public class UsuarioValidator implements CustomValidationStrategy<Usuario> {
 	private final String EMAIL_REGEX = "^[a-zA-Z]+[a-zA-Z0-9]*([._-]{0,1}[a-zA-Z0-9]+){0,3}@[a-zA-Z0-9]+.[a-zA-Z]+$";
 	private final String LOGIN_REGEX = "^([a-zA-Z]+[a-zA-Z0-9]*){4,20}$";
 	@Inject private ValidationStrategyHelper helper;
-	@Inject private UsuarioDAO udao;
+	@Inject private UsuarioDao udao;
 	
 	public void addErrors(Usuario usuario) {
 		if(usuario == null){

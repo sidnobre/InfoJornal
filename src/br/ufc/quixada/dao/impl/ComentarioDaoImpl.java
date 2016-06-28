@@ -1,4 +1,4 @@
-package br.ufc.quixada.dao;
+package br.ufc.quixada.dao.impl;
 
 import java.util.List;
 
@@ -6,13 +6,16 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.ufc.quixada.dao.ComentarioDao;
 import br.ufc.quixada.model.Comentario;
+import br.ufc.quixada.model.Noticia;
 
-public class ComentarioDAO implements IComentarioDAO{
+public class ComentarioDaoImpl implements ComentarioDao{
 	
 	@Inject EntityManager manager;
 
 	public void adicionar(Comentario comentario) {
+		comentario.setNoticia(manager.find(Noticia.class, comentario.getNoticia().getId()));
 		manager.persist(comentario);
 	}
 

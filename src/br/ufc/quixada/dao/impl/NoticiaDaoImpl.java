@@ -1,4 +1,4 @@
-package br.ufc.quixada.dao;
+package br.ufc.quixada.dao.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -8,12 +8,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.ufc.quixada.dao.NoticiaDao;
 import br.ufc.quixada.model.Noticia;
 import br.ufc.quixada.model.Secao;
 import br.ufc.quixada.model.Usuario;
 
 @RequestScoped
-public class NoticiaDAO implements INoticiaDAO{
+public class NoticiaDaoImpl implements NoticiaDao{
 	
 	@Inject private EntityManager manager;
 

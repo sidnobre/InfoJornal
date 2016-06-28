@@ -9,8 +9,8 @@ import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.simplevalidator.SimpleValidator;
-import br.ufc.quixada.dao.ClassificadoDAO;
-import br.ufc.quixada.dao.SecaoDAO;
+import br.ufc.quixada.dao.ClassificadoDao;
+import br.ufc.quixada.dao.SecaoDao;
 import br.ufc.quixada.model.Classificado;
 import br.ufc.quixada.security.AutenticacaoRule;
 import br.ufc.quixada.security.EditorRule;
@@ -22,8 +22,8 @@ import br.ufc.quixada.validator.OfertaValidator;
 @Controller
 public class ClassificadoController {
 	
-	@Inject private ClassificadoDAO cdao;
-	@Inject private SecaoDAO sdao;
+	@Inject private ClassificadoDao cdao;
+	@Inject private SecaoDao sdao;
 	@Inject private SimpleValidator validator;
 	@Inject private Result resultado;
 	

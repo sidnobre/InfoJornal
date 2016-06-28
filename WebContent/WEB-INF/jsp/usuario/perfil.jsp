@@ -29,6 +29,14 @@
 				</h1>
 			</div>
 		</div>
+		<c:if test="${not empty confirmations}">
+			<div class="alert alert-dismissible alert-success">
+  				<button type="button" class="close" data-dismiss="alert">×</button>
+        		<c:forEach var="confirmation" items="${confirmations}">
+        			<p class="text-center"><span class="glyphicon glyphicon-ok"></span><strong> ${confirmation.message}</strong></p>
+        		</c:forEach>
+    		</div>
+		</c:if>
 		<div class="col-md-3 column"></div>
 		<div class="col-md-6 column well altura-min-form">
 			<div class="row">
@@ -51,8 +59,8 @@
                     		<span class="icon-cog icon-white"></span><span class="caret"></span>
                 		</a>
                 	<ul class="dropdown-menu">
-                    	<li><a href="#"><span class="icon-wrench"></span> Alterar E-mail</a></li>
-                    	<li><a href="#"><span class="icon-trash"></span> Alterar Senha</a></li>
+                    	<li><a href="<c:url value='/usuario/alterarEmail'></c:url>"><span class="icon-wrench"></span> Alterar E-mail</a></li>
+                    	<li><a href="<c:url value='/usuario/alterarSenha'></c:url>"><span class="icon-trash"></span> Alterar Senha</a></li>
                 	</ul>
             	</div>
             </div>

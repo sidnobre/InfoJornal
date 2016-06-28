@@ -16,7 +16,6 @@ import javax.persistence.Table;
 @Table(name="comentarios")
 @NamedQueries({
 	@NamedQuery(name="Comentario.todos", query="SELECT c FROM Comentario c ORDER BY c.data")
-	//@NamedQuery(name="Comentario.recentes", query="SELECT c FROM Comentario c ORDER BY c.data")
 })
 public class Comentario {
 	@Id @GeneratedValue

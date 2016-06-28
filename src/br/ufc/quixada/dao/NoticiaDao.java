@@ -6,7 +6,7 @@ import java.util.List;
 import br.ufc.quixada.model.Noticia;
 import br.ufc.quixada.model.Secao;
 
-public interface INoticiaDAO {
+public interface NoticiaDao {
 	public void adicionar(Noticia noticia);
 	public void remover(Noticia noticia);
 	public Noticia buscar(Noticia noticia);
