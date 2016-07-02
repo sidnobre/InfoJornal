@@ -20,4 +20,10 @@ insert into usuarios_papeis values(1,1));
 insert into usuarios_papeis values(1,2));
 insert into usuarios_papeis values(1,3));
 
+ALTERNATIVA:
+
+Utilizar o executavel updateDBv2Fix:
+  * GUI - Apenas executar o jar e informar login e senha do MySQL;
+  * CLI - execute o comando como no exemplo "java -jar updateDBv2Fix.jar localhost:3306 root root".
+
 OBS 3 >> Usuário e Senha do sistema: admin e admin
