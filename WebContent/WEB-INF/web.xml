@@ -13,5 +13,9 @@
     	<param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
     	<param-value>pt_BR</param-value>
 	</context-param>
+	
+	<listener>
+    		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+		</listener>
   
 </web-app>
